@@ -1,7 +1,7 @@
 
 ## Demo
 
-![Demo](https://omarehab007.github.io/portfolio/)
+![Demo] https://omarehab007.github.io/portfolio/
 
 ## Prerequisites
 
