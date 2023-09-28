@@ -1,8 +1,3 @@
-
-## Demo
-
-![Demo] https://omarehab007.github.io/portfolio/
-
 ## Prerequisites
 
 Before you begin, ensure you have met the following requirements:
