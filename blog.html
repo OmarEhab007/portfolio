@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog - OMAR.DEV</title>
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="./assets/images/logo-2.png" type="image/x-icon">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Pixelify+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Marked.js for Markdown parsing -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  
+  <!-- Highlight.js for code syntax highlighting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="stylesheet" href="./assets/css/blog.css">
+</head>
+<body>
+  <!-- Rain/Stars Canvas Background -->
+  <canvas id="background-canvas"></canvas>
+  
+  <!-- Main Container -->
+  <div class="blog-container">
+    
+    <!-- Header -->
+    <header class="blog-header">
+      <div class="blog-header-inner">
+        <a href="index.html" class="blog-logo">
+          <span class="moon-inline">☾</span> OMAR.DEV
+        </a>
+        <nav class="blog-nav">
+          <a href="index.html">Home</a>
+          <a href="blog.html" class="active">Blog</a>
+          <a href="https://github.com/OmarEhab007" target="_blank">GitHub</a>
+        </nav>
+      </div>
+    </header>
+    
+    <!-- Blog Content Area -->
+    <main class="blog-main">
+      
+      <!-- Blog List View (shown when no post is selected) -->
+      <section id="blog-list" class="blog-list-section">
+        <div class="blog-list-header">
+          <h1><span class="moon-inline">☾</span> Blog Posts</h1>
+          <p class="blog-subtitle">Thoughts on code, systems, and the occasional 3AM debugging session</p>
+        </div>
+        
+        <div id="blog-entries" class="blog-entries">
+          <!-- Blog entries will be loaded here via JavaScript -->
+          <div class="loading-spinner">
+            <span class="spinner"></span> Loading posts...
+          </div>
+        </div>
+      </section>
+      
+      <!-- Single Blog Post View (hidden by default) -->
+      <section id="blog-post" class="blog-post-section" style="display: none;">
+        <div class="blog-post-header">
+          <a href="blog.html" class="back-link">← Back to all posts</a>
+          <h1 id="post-title"></h1>
+          <div class="post-meta">
+            <span id="post-date" class="post-date"></span>
+            <div id="post-tags" class="post-tags"></div>
+          </div>
+        </div>
+        
+        <article id="post-content" class="post-content">
+          <!-- Markdown content will be rendered here -->
+        </article>
+        
+        <div class="post-footer">
+          <a href="blog.html" class="back-link">← Back to all posts</a>
+          
+          <div class="share-links">
+            <span>Share:</span>
+            <a href="#" id="share-twitter" target="_blank" title="Share on Twitter">𝕏</a>
+            <a href="#" id="share-linkedin" target="_blank" title="Share on LinkedIn">in</a>
+            <button id="copy-link" title="Copy link">📋</button>
+          </div>
+        </div>
+      </section>
+      
+    </main>
+    
+    <!-- Sidebar -->
+    <aside class="blog-sidebar">
+      
+      <!-- About Box -->
+      <div class="box sidebar-box">
+        <div class="box-header">
+          <span class="moon-inline">☾</span> About
+        </div>
+        <div class="box-content">
+          <p>I'm <strong>Omar</strong>, a software engineer from Egypt. I write about backend development, distributed systems, and BMC Remedy.</p>
+          <div class="sidebar-links">
+            <a href="https://github.com/OmarEhab007" target="_blank">GitHub</a>
+            <a href="https://www.linkedin.com/in/omar-e-a94808144/" target="_blank">LinkedIn</a>
+            <a href="mailto:oehab559@gmail.com">Email</a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Tags Box -->
+      <div class="box sidebar-box">
+        <div class="box-header">
+          <span class="moon-inline">☾</span> Tags
+        </div>
+        <div class="box-content">
+          <div id="tags-cloud" class="tags-cloud">
+            <!-- Tags will be generated from blog posts -->
+          </div>
+        </div>
+      </div>
+      
+      <!-- Recent Posts -->
+      <div class="box sidebar-box">
+        <div class="box-header">
+          <span class="moon-inline">☾</span> Recent Posts
+        </div>
+        <div class="box-content">
+          <ul id="recent-posts" class="recent-posts-list">
+            <!-- Recent posts will be loaded here -->
+          </ul>
+        </div>
+      </div>
+      
+      <!-- RSS Feed -->
+      <div class="box sidebar-box">
+        <div class="box-header">
+          <span class="moon-inline">☾</span> Subscribe
+        </div>
+        <div class="box-content">
+          <p class="rss-text">Get updates when I post new articles</p>
+          <a href="#" class="rss-button">📡 RSS Feed</a>
+        </div>
+      </div>
+      
+    </aside>
+    
+  </div>
+  
+  <!-- Footer -->
+  <footer class="site-footer">
+    <p>(c) 2024-2025 Omar Ehab. All Rights Reserved.</p>
+    <p><a href="mailto:oehab559@gmail.com">oehab559@gmail.com</a></p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="./assets/js/script.js"></script>
+  <script src="./assets/js/blog.js"></script>
+</body>
+</html>
+

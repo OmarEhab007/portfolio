@@ -1,1078 +1,453 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> Omar Ehab-Personal Portfolio</title>
-
-  <!--
-    - favicon
-  -->
-  <link rel="shortcut icon" href="./assets/images/logo-2.png" type="image/x-icon">
-
-  <!--
-    - custom css link
-  -->
-  <link rel="stylesheet" href="./assets/css/style.css">
-
-  <!--
-    - google font link
-  -->
+  <title>OMAR.DEV - Welcome!</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="./assets/images/neon-o-icon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="./assets/images/logo-2.png" type="image/png">
+  
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Pixelify+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="./assets/css/style.css">
 </head>
-
 <body>
-
-  <!--
-    - #MAIN
-  -->
-
-  <main>
-
-    <!--
-      - #SIDEBAR
-    -->
-
-    <aside class="sidebar" data-sidebar>
-
-      <div class="sidebar-info">
-
-        <figure class="avatar-box">
-          <img src="./assets/images/omar.png" alt="Omar Ehab" width="80">
-        </figure>
-
-        <div class="info-content">
-          <h1 class="name" title="Omar Ehab">Omar Ehab</h1>
-
-          <p class="title">Software Engineer</p>
+  <!-- Rain/Stars Canvas Background -->
+  <canvas id="background-canvas"></canvas>
+  
+  <!-- Main Container -->
+  <div class="site-container">
+    
+    <!-- Left Column -->
+    <div class="column column-left">
+      
+      <!-- Welcome Box -->
+      <div class="box welcome-box">
+        <div class="box-header">
+          <img src="./assets/images/moon.png" alt="" class="moon-icon" onerror="this.outerHTML='☾'">
+          Welcome to OMAR.DEV!
+          <img src="./assets/images/new-profile pic.png" alt="Omar" class="avatar-small" onerror="this.style.display='none'">
+          <a href="#" class="mood-link" id="mood-tracker" title="Mood tracker">[ +0.72 / -0.28 ]</a>
         </div>
-
-        <button class="info_more-btn" data-sidebar-btn>
-          <span>Show Contacts</span>
-
-          <ion-icon name="chevron-down"></ion-icon>
-        </button>
-
-      </div>
-
-      <div class="sidebar-info_more">
-
-        <div class="separator"></div>
-
-        <ul class="contacts-list">
-
-          <li class="contact-item">
-
-            <div class="icon-box">
-              <ion-icon name="mail-outline"></ion-icon>
-            </div>
-
-            <div class="contact-info">
-              <p class="contact-title">Email</p>
-
-              <a href="mailto:oehab559@gmail.com" class="contact-link">oehab559@gmail.com</a>
-            </div>
-
-          </li>
-
-          <li class="contact-item">
-
-            <div class="icon-box">
-              <ion-icon name="phone-portrait-outline"></ion-icon>
-            </div>
-
-            <div class="contact-info">
-              <p class="contact-title">Phone</p>
-
-              <a href="tel:+12133522795" class="contact-link">+(02) 01019063529</a>
-            </div>
-
-          </li>
-
-          <li class="contact-item">
-
-            <div class="icon-box">
-              <ion-icon name="calendar-outline"></ion-icon>
-            </div>
-
-            <div class="contact-info">
-              <p class="contact-title">Birthday</p>
-
-              <time datetime="1982-06-23">Aug 6, 2000</time>
-            </div>
-
-          </li>
-
-          <li class="contact-item">
-
-            <div class="icon-box">
-              <ion-icon name="location-outline"></ion-icon>
-            </div>
-
-            <div class="contact-info">
-              <p class="contact-title">Location</p>
-
-              <address>Giza, Egypt</address>
-            </div>
-
-          </li>
-
-        </ul>
-
-        <div class="separator"></div>
-
-        <ul class="social-list">
-
-          <li class="social-item">
-            <a href="https://github.com/OmarEhab007" target="_blank" class="social-link">
-              <ion-icon name="logo-github"></ion-icon>
-            </a>
-          </li>
-
-          <li class="social-item">
-            <a href="https://www.linkedin.com/in/omar-ehab-a94808144/" target="_blank" class="social-link">
-              <ion-icon name="logo-linkedin"></ion-icon>
-            </a>
-          </li>
-
-        </ul>
-
-      </div>
-
-    </aside>
-
-
-
-
-
-    <!--
-      - #main-content
-    -->
-
-    <div class="main-content">
-
-      <!--
-        - #NAVBAR
-      -->
-
-      <nav class="navbar">
-
-        <ul class="navbar-list">
-
-          <li class="navbar-item">
-            <button class="navbar-link  active" data-nav-link>About</button>
-          </li>
-
-          <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Resume</button>
-          </li>
-
-          <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Portfolio</button>
-          </li>
-
-          <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Blog</button>
-          </li>
-
-          <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Contact</button>
-          </li>
-
-        </ul>
-
-      </nav>
-
-
-
-
-
-      <!--
-        - #ABOUT
-      -->
-
-      <article class="about  active" data-page="about">
-
-        <header>
-          <h2 class="h2 article-title">About me</h2>
-        </header>
-
-        <section class="about-text">
-          <p>
-            Hello, I'm Omar Ehab, a passionate software engineer with a strong focus on full-stack web development.
-            I'm delighted to welcome you to my corner of the internet, where I'd like to share a bit about myself and my
-            journey in the world of technology.
-          </p>
-
-          <p>
-            As a full-stack web developer, I have expertise in both front-end and back-end technologies. On the front
-            end, I craft user-friendly and visually appealing interfaces using HTML, CSS, JavaScript and React.
-            Meanwhile, on
-            the back end, I build robust server-side applications using technologies like Node.js, Python, C#
-          </p>
-        </section>
-
-
-        <!--
-          - service
-        -->
-
-        <section class="service">
-
-          <h3 class="h3 service-title">What i'm doing</h3>
-
-          <ul class="service-list">
-
-            <li class="service-item">
-
-              <div class="service-icon-box">
-                <img src="./assets/images/icon-design.svg
-                " alt="design icon" width="40">
-              </div>
-
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Web design</h4>
-
-                <p class="service-item-text">
-                  The most modern and high-quality design made at a professional level.
-                </p>
-              </div>
-
-            </li>
-
-            <li class="service-item">
-
-              <div class="service-icon-box">
-                <img src="./assets/images/icon-dev.svg" alt="Web development icon" width="40">
-              </div>
-
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Web development</h4>
-
-                <p class="service-item-text">
-                  High-quality development of sites at the professional level.
-                </p>
-              </div>
-
-            </li>
-
-            <li class="service-item">
-
-              <div class="service-icon-box">
-                <img src="./assets/images/big-data.svg" alt="Big Data icon" width="40">
-              </div>
-
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Data Engineering</h4>
-
-                <p class="service-item-text">
-                  Specialize in architecting and optimizing data pipelines, ensuring seamless data flow and
-                  transformation for informed decision-making.
-                </p>
-              </div>
-
-            </li>
-
-            <li class="service-item">
-
-              <div class="service-icon-box">
-                <img src="./assets/images/ml.svg" alt="ml icon" width="40">
-              </div>
-
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Machine Learning</h4>
-
-                <p class="service-item-text">
-                  leverage machine learning algorithms to develop predictive models that extract meaningful patterns and
-                  insights from complex data.
-                </p>
-              </div>
-
-            </li>
-
+        <div class="box-content welcome-content">
+          <!-- <p>This is my <span class="highlight-text">li</span>t<span class="highlight-text">t</span>le website and portfolio with the old web aesthetic.</p> -->
+          
+          <p>I'm a <span class="text-green">software engineer</span>. I build distributed systems, wrangle microservices, and occasionally convince BMC Remedy to behave.</p>
+          
+          <p class="quick-facts-title">Some quick facts:</p>
+          <ul class="quick-facts">
+            <li>I'm from <span class="text-yellow">Egypt</span> (Cairo/Giza region)</li>
+            <li>My main languages are <span class="text-cyan">Java</span>, <span class="text-cyan">Go</span>, and <span class="text-cyan">TypeScript</span></li>
+            <!-- <li>I love <span class="moon-inline">☾</span> the Moon and dark themes</li> -->
+            <li>I work at <span class="text-green">CyberMak</span> as a BMC Remedy Developer</li>
+            <li>4+ years of making servers happy</li>
+            <!-- <li>Coffee consumption: <span class="text-yellow">Critical</span></li> -->
           </ul>
-
-        </section>
-
-
-        <!--
-          - testimonials
-        -->
-        <!-- 
-        <section class="testimonials">
-
-          <h3 class="h3 testimonials-title">Testimonials</h3>
-
-          <ul class="testimonials-list has-scrollbar">
-
-            <li class="testimonials-item">
-              <div class="content-card" data-testimonials-item>
-
-                <figure class="testimonials-avatar-box">
-                  <img src="./assets/images/avatar-1.png" alt="Daniel lewis" width="60" data-testimonials-avatar>
-                </figure>
-
-                <h4 class="h4 testimonials-item-title" data-testimonials-title>Daniel lewis</h4>
-
-                <div class="testimonials-text" data-testimonials-text>
-                  <p>
-                    Richard was hired to create a corporate identity. We were very pleased with the work done. She has a
-                    lot of experience
-                    and is very concerned about the needs of client. Lorem ipsum dolor sit amet, ullamcous cididt
-                    consectetur adipiscing
-                    elit, seds do et eiusmod tempor incididunt ut laborels dolore magnarels alia.
-                  </p>
-                </div>
-
-              </div>
-            </li>
-
-            <li class="testimonials-item">
-              <div class="content-card" data-testimonials-item>
-
-                <figure class="testimonials-avatar-box">
-                  <img src="./assets/images/avatar-2.png" alt="Jessica miller" width="60" data-testimonials-avatar>
-                </figure>
-
-                <h4 class="h4 testimonials-item-title" data-testimonials-title>Jessica miller</h4>
-
-                <div class="testimonials-text" data-testimonials-text>
-                  <p>
-                    Richard was hired to create a corporate identity. We were very pleased with the work done. She has a
-                    lot of experience
-                    and is very concerned about the needs of client. Lorem ipsum dolor sit amet, ullamcous cididt
-                    consectetur adipiscing
-                    elit, seds do et eiusmod tempor incididunt ut laborels dolore magnarels alia.
-                  </p>
-                </div>
-
-              </div>
-            </li>
-
-            <li class="testimonials-item">
-              <div class="content-card" data-testimonials-item>
-
-                <figure class="testimonials-avatar-box">
-                  <img src="./assets/images/avatar-3.png" alt="Emily evans" width="60" data-testimonials-avatar>
-                </figure>
-
-                <h4 class="h4 testimonials-item-title" data-testimonials-title>Emily evans</h4>
-
-                <div class="testimonials-text" data-testimonials-text>
-                  <p>
-                    Richard was hired to create a corporate identity. We were very pleased with the work done. She has a
-                    lot of experience
-                    and is very concerned about the needs of client. Lorem ipsum dolor sit amet, ullamcous cididt
-                    consectetur adipiscing
-                    elit, seds do et eiusmod tempor incididunt ut laborels dolore magnarels alia.
-                  </p>
-                </div>
-
-              </div>
-            </li>
-
-            <li class="testimonials-item">
-              <div class="content-card" data-testimonials-item>
-
-                <figure class="testimonials-avatar-box">
-                  <img src="./assets/images/avatar-4.png" alt="Henry william" width="60" data-testimonials-avatar>
-                </figure>
-
-                <h4 class="h4 testimonials-item-title" data-testimonials-title>Henry william</h4>
-
-                <div class="testimonials-text" data-testimonials-text>
-                  <p>
-                    Richard was hired to create a corporate identity. We were very pleased with the work done. She has a
-                    lot of experience
-                    and is very concerned about the needs of client. Lorem ipsum dolor sit amet, ullamcous cididt
-                    consectetur adipiscing
-                    elit, seds do et eiusmod tempor incididunt ut laborels dolore magnarels alia.
-                  </p>
-                </div>
-
-              </div>
-            </li>
-
-          </ul>
-
-        </section> -->
-
-
-        <!--
-          - testimonials modal
-        -->
-
-        <div class="modal-container" data-modal-container>
-
-          <div class="overlay" data-overlay></div>
-
-          <section class="testimonials-modal">
-
-            <button class="modal-close-btn" data-modal-close-btn>
-              <ion-icon name="close-outline"></ion-icon>
-            </button>
-
-            <div class="modal-img-wrapper">
-              <figure class="modal-avatar-box">
-                <img src="./assets/images/avatar-1.png" alt="Daniel lewis" width="80" data-modal-img>
-              </figure>
-
-              <img src="./assets/images/icon-quote.svg" alt="quote icon">
-            </div>
-
-            <div class="modal-content">
-
-              <h4 class="h3 modal-title" data-modal-title>Daniel lewis</h4>
-
-              <time datetime="2021-06-14">14 June, 2021</time>
-
-              <div data-modal-text>
-                <p>
-                  Richard was hired to create a corporate identity. We were very pleased with the work done. She has a
-                  lot of experience
-                  and is very concerned about the needs of client. Lorem ipsum dolor sit amet, ullamcous cididt
-                  consectetur adipiscing
-                  elit, seds do et eiusmod tempor incididunt ut laborels dolore magnarels alia.
-                </p>
-              </div>
-
-            </div>
-
-          </section>
-
+          
+          <p>You can read more about me on my <a href="https://github.com/OmarEhab007" target="_blank">GitHub</a> or <a href="https://www.linkedin.com/in/omar-e-a94808144/" target="_blank">LinkedIn</a>!</p>
         </div>
-
-
-        <!--
-          - clients
-        -->
-
-        <!-- <section class="clients">
-
-          <h3 class="h3 clients-title">Clients</h3>
-
-          <ul class="clients-list has-scrollbar">
-
-            <li class="clients-item">
-              <a href="#">
-                <img src="./assets/images/logo-1-color.png" alt="client logo">
-              </a>
-            </li>
-
-            <li class="clients-item">
-              <a href="#">
-                <img src="./assets/images/logo-2-color.png" alt="client logo">
-              </a>
-            </li>
-
-            <li class="clients-item">
-              <a href="#">
-                <img src="./assets/images/logo-3-color.png" alt="client logo">
-              </a>
-            </li>
-
-            <li class="clients-item">
-              <a href="#">
-                <img src="./assets/images/logo-4-color.png" alt="client logo">
-              </a>
-            </li>
-
-            <li class="clients-item">
-              <a href="#">
-                <img src="./assets/images/logo-5-color.png" alt="client logo">
-              </a>
-            </li>
-
-            <li class="clients-item">
-              <a href="#">
-                <img src="./assets/images/logo-6-color.png" alt="client logo">
-              </a>
-            </li>
-
-          </ul>
-
-        </section> -->
-
-      </article>
-
-
-
-
-
-      <!--
-        - #RESUME
-      -->
-
-      <article class="resume" data-page="resume">
-
-        <header>
-          <h2 class="h2 article-title">Resume</h2>
-        </header>
-
-        <section class="timeline">
-
-          <div class="title-wrapper">
-            <div class="icon-box">
-              <ion-icon name="book-outline"></ion-icon>
-            </div>
-
-            <h3 class="h3">Education</h3>
-          </div>
-
-          <ol class="timeline-list">
-
-            <li class="timeline-item">
-
-              <h4 class="h4 timeline-item-title">Higher Technology Institute (HTI)</h4>
-
-              <span>2018 — 2023</span>
-
-              <p class="timeline-text">
-                Studying Electrical And communication Engineering.
-              </p>
-
-            </li>
-
-          </ol>
-
-        </section>
-
-        <section class="timeline">
-
-          <div class="title-wrapper">
-            <div class="icon-box">
-              <ion-icon name="book-outline"></ion-icon>
-            </div>
-
-            <h3 class="h3">Experience</h3>
-          </div>
-
-          <ol class="timeline-list">
-
-            <li class="timeline-item">
-
-              <h4 class="h4 timeline-item-title">Machine Learning Engineer</h4>
-
-              <span>2021 — 2022</span>
-
-              <p class="timeline-text">
-                Developing Algorithm tha make single proccessing for (ECG) signals.
-              </p>
-
-            </li>
-
-            <li class="timeline-item">
-
-              <h4 class="h4 timeline-item-title">Full Stack Web Development</h4>
-
-              <span>2023 — Present</span>
-
-              <p class="timeline-text">
-                Freelancing on (Upwork) and working on my own projects.
-              </p>
-
-            </li>
-
-          </ol>
-
-        </section>
-
-        <section class="skill">
-
-          <h3 class="h3 skills-title">My skills</h3>
-
-          <ul class="skills-list content-card">
-
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">React</h5>
-                <data value="80">80%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 80%;"></div>
-              </div>
-
-            </li>
-
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">NextJs</h5>
-                <data value="70">70%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 70%;"></div>
-              </div>
-
-            </li>
-
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">Typescript</h5>
-                <data value=70">70%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 70%;"></div>
-              </div>
-
-            </li>
-
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">Javascript</h5>
-                <data value=90">90%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 90%;"></div>
-              </div>
-
-            </li>
-
-
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">MongoDB</h5>
-                <data value=90">90%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 90%;"></div>
-              </div>
-
-            </li>
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">PotgressDB</h5>
-                <data value=90">90%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 90%;"></div>
-              </div>
-
-            </li>
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">Git/Github</h5>
-                <data value=80">80%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 80%;"></div>
-              </div>
-
-
-          </ul>
-
-        </section>
-
-      </article>
-
-
-
-
-
-      <!--
-        - #PORTFOLIO
-      -->
-
-      <article class="portfolio" data-page="portfolio">
-
-        <header>
-          <h2 class="h2 article-title">Portfolio</h2>
-        </header>
-
-        <section class="projects">
-
-          <ul class="filter-list">
-
-            <li class="filter-item">
-              <button class="active" data-filter-btn>All</button>
-            </li>
-
-            <li class="filter-item">
-              <button data-filter-btn>Web Development</button>
-            </li>
-
-            <li class="filter-item">
-              <button data-filter-btn>ML</button>
-            </li>
-
-            <!-- <li class="filter-item">
-              <button data-filter-btn>Web development</button>
-            </li> -->
-
-          </ul>
-
-          <div class="filter-select-box">
-
-            <button class="filter-select" data-select>
-
-              <div class="select-value" data-selecct-value>Select category</div>
-
-              <div class="select-icon">
-                <ion-icon name="chevron-down"></ion-icon>
-              </div>
-
-            </button>
-
-            <ul class="select-list">
-
-              <li class="select-item">
-                <button data-select-item>All</button>
-              </li>
-
-              <li class="select-item">
-                <button data-select-item>Web Development</button>
-              </li>
-
-              <li class="select-item">
-                <button data-select-item>ML</button>
-              </li>
-
-              <!-- <li class="select-item">
-                <button data-select-item>Web development</button>
-              </li> -->
-
+      </div>
+      
+      <!-- Experience Box -->
+      <div class="box experience-box">
+        <div class="box-header">
+          <span class="moon-inline">☾</span> Experience
+        </div>
+        <div class="box-content">
+          <div class="exp-item">
+            <div class="exp-title">BMC Remedy Developer & Administrator</div>
+            <div class="exp-meta">@ CyberMak • 2024 - Present</div>
+            <ul class="exp-list">
+              <li>Configured BMC Remedy ITSM modules</li>
+              <li>Developed complex workflows and automations</li>
+              <li>Integrated with external systems via REST APIs</li>
             </ul>
-
           </div>
-
-          <ul class="project-list">
-
-            <li class="project-item  active" data-filter-item data-category="web development">
-              <a href="https://github.com/OmarEhab007/ecommerce-admin" target="_blank">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/Dashboard.png" alt="ADmin" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Admin Page</h3>
-
-                <p class="project-category">Web development</p>
-
+          <div class="exp-item">
+            <div class="exp-title">Backend Developer | Java Stack</div>
+            <div class="exp-meta">@ E-Commerce Platform • 2023 - 2024</div>
+            <ul class="exp-list">
+              <li>Developed microservices with Spring Boot</li>
+              <li>Implemented OAuth2/JWT security</li>
+              <li>Automated deployment with K8s</li>
+            </ul>
+          </div>
+          <div class="exp-item">
+            <div class="exp-title">Backend Developer | Node.js</div>
+            <div class="exp-meta">@ Esteathan School ERP • 2021 - 2023</div>
+            <ul class="exp-list">
+              <li>Built RESTful APIs for 20+ schools</li>
+              <li>Managed MongoDB, optimized with Redis</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Projects Box -->
+      <div class="box projects-box">
+        <div class="box-header">
+          <span class="moon-inline">☾</span> Projects
+        </div>
+        <div class="box-content">
+          <ul class="projects-list">
+            <li>
+              <a href="https://github.com/OmarEhab007/Data_Engineering_Mentorship" target="_blank" class="project-link">
+                <span class="project-icon">☾</span> Data Engineering Mentorship
               </a>
+              <span class="project-stars">⭐ 278</span>
+              <p class="project-desc">Comprehensive mentorship program and resource collection for data engineering. <a href="https://github.com/OmarEhab007/Data_Engineering_Mentorship" target="_blank">Link</a></p>
             </li>
-
-            <li class="project-item  active" data-filter-item data-category="web development">
-              <a href="https://github.com/OmarEhab007/ecommerce-store" target="_blank">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/single-item.png" alt="store" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">E-commerce Store</h3>
-
-                <p class="project-category">Web development</p>
-
+            <li>
+              <a href="https://github.com/OmarEhab007/Da7e7" target="_blank" class="project-link">
+                <span class="project-icon">☾</span> Da7e7
               </a>
+              <p class="project-desc">SaaS platform using AI for PDF text summarization. Built with Next.js 13.5, tRPC, TypeScript. <a href="https://github.com/OmarEhab007/Da7e7" target="_blank">Link</a></p>
             </li>
-
-            <li class="project-item  active" data-filter-item data-category="web development">
-              <a href="https://github.com/OmarEhab007/Jobs-Platform">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/landing-page.png" alt="jobify" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Job Searching Platform</h3>
-
-                <p class="project-category">Web development</p>
-
+            <li>
+              <a href="https://github.com/OmarEhab007/ecommerce-admin" target="_blank" class="project-link">
+                <span class="project-icon">☾</span> E-Commerce Admin
               </a>
+              <p class="project-desc">Full Stack E-Commerce Dashboard & CMS with Next.js 13, React, Prisma. <a href="https://github.com/OmarEhab007/ecommerce-admin" target="_blank">Link</a></p>
             </li>
-
+            <li>
+              <a href="https://github.com/OmarEhab007/Microservice-SpringBoot" target="_blank" class="project-link">
+                <span class="project-icon">☾</span> Microservice SpringBoot
+              </a>
+              <p class="project-desc">Microservices architecture demo with Spring Boot, demonstrating distributed patterns. <a href="https://github.com/OmarEhab007/Microservice-SpringBoot" target="_blank">Link</a></p>
+            </li>
+            <li>
+              <a href="https://github.com/OmarEhab007/Facial-emotion-recognition" target="_blank" class="project-link">
+                <span class="project-icon">☾</span> Facial Emotion Recognition
+              </a>
+              <p class="project-desc">Deep Learning model for facial expression recognition using Python. <a href="https://github.com/OmarEhab007/Facial-emotion-recognition" target="_blank">Link</a></p>
+            </li>
           </ul>
-
-        </section>
-
-      </article>
-
-
-
-
-
-      <!--
-        - #BLOG
-      -->
-
-      <article class="blog" data-page="blog">
-
-        <header>
-          <h2 class="h2 article-title">Blog</h2>
-        </header>
-
-        <section class="blog-posts">
-
-          <ul class="blog-posts-list">
-
-            <li class="blog-post-item">
-              <a href="#">
-
-                <figure class="blog-banner-box">
-                  <img src="./assets/images/blog-1.jpg" alt="Design conferences in 2022" loading="lazy">
-                </figure>
-
-                <div class="blog-content">
-
-                  <div class="blog-meta">
-                    <p class="blog-category">Design</p>
-
-                    <span class="dot"></span>
-
-                    <time datetime="2022-02-23">Fab 23, 2022</time>
-                  </div>
-
-                  <h3 class="h3 blog-item-title">Design conferences in 2022</h3>
-
-                  <p class="blog-text">
-                    Veritatis et quasi architecto beatae vitae dicta sunt, explicabo.
-                  </p>
-
-                </div>
-
-              </a>
-            </li>
-
-            <li class="blog-post-item">
-              <a href="#">
-
-                <figure class="blog-banner-box">
-                  <img src="./assets/images/blog-2.jpg" alt="Best fonts every designer" loading="lazy">
-                </figure>
-
-                <div class="blog-content">
-
-                  <div class="blog-meta">
-                    <p class="blog-category">Design</p>
-
-                    <span class="dot"></span>
-
-                    <time datetime="2022-02-23">Fab 23, 2022</time>
-                  </div>
-
-                  <h3 class="h3 blog-item-title">Best fonts every designer</h3>
-
-                  <p class="blog-text">
-                    Sed ut perspiciatis, nam libero tempore, cum soluta nobis est eligendi.
-                  </p>
-
-                </div>
-
-              </a>
-            </li>
-
-            <li class="blog-post-item">
-              <a href="#">
-
-                <figure class="blog-banner-box">
-                  <img src="./assets/images/blog-3.jpg" alt="Design digest #80" loading="lazy">
-                </figure>
-
-                <div class="blog-content">
-
-                  <div class="blog-meta">
-                    <p class="blog-category">Design</p>
-
-                    <span class="dot"></span>
-
-                    <time datetime="2022-02-23">Fab 23, 2022</time>
-                  </div>
-
-                  <h3 class="h3 blog-item-title">Design digest #80</h3>
-
-                  <p class="blog-text">
-                    Excepteur sint occaecat cupidatat no proident, quis nostrum exercitationem ullam corporis suscipit.
-                  </p>
-
-                </div>
-
-              </a>
-            </li>
-
-            <li class="blog-post-item">
-              <a href="#">
-
-                <figure class="blog-banner-box">
-                  <img src="./assets/images/blog-4.jpg" alt="UI interactions of the week" loading="lazy">
-                </figure>
-
-                <div class="blog-content">
-
-                  <div class="blog-meta">
-                    <p class="blog-category">Design</p>
-
-                    <span class="dot"></span>
-
-                    <time datetime="2022-02-23">Fab 23, 2022</time>
-                  </div>
-
-                  <h3 class="h3 blog-item-title">UI interactions of the week</h3>
-
-                  <p class="blog-text">
-                    Enim ad minim veniam, consectetur adipiscing elit, quis nostrud exercitation ullamco laboris nisi.
-                  </p>
-
-                </div>
-
-              </a>
-            </li>
-
-            <li class="blog-post-item">
-              <a href="#">
-
-                <figure class="blog-banner-box">
-                  <img src="./assets/images/blog-5.jpg" alt="The forgotten art of spacing" loading="lazy">
-                </figure>
-
-                <div class="blog-content">
-
-                  <div class="blog-meta">
-                    <p class="blog-category">Design</p>
-
-                    <span class="dot"></span>
-
-                    <time datetime="2022-02-23">Fab 23, 2022</time>
-                  </div>
-
-                  <h3 class="h3 blog-item-title">The forgotten art of spacing</h3>
-
-                  <p class="blog-text">
-                    Maxime placeat, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  </p>
-
-                </div>
-
-              </a>
-            </li>
-
-            <li class="blog-post-item">
-              <a href="#">
-
-                <figure class="blog-banner-box">
-                  <img src="./assets/images/blog-6.jpg" alt="Design digest #79" loading="lazy">
-                </figure>
-
-                <div class="blog-content">
-
-                  <div class="blog-meta">
-                    <p class="blog-category">Design</p>
-
-                    <span class="dot"></span>
-
-                    <time datetime="2022-02-23">Fab 23, 2022</time>
-                  </div>
-
-                  <h3 class="h3 blog-item-title">Design digest #79</h3>
-
-                  <p class="blog-text">
-                    Optio cumque nihil impedit uo minus quod maxime placeat, velit esse cillum.
-                  </p>
-
-                </div>
-
-              </a>
-            </li>
-
-          </ul>
-
-        </section>
-
-      </article>
-
-
-
-
-
-      <!--
-        - #CONTACT
-      -->
-
-      <article class="contact" data-page="contact">
-
-        <header>
-          <h2 class="h2 article-title">Contact</h2>
-        </header>
-
-        <section class="mapbox" data-mapbox>
-          <figure>
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6888.305327978736!2d30.9018122965511!3d30.31817516068092!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x145862700484d37d%3A0xa83d2545bed24be6!2sWardan%2C%20Werdan%2C%20Monsha&#39;et%20El%20Kanater%2C%20Giza%20Governorate!5e0!3m2!1sen!2seg!4v1695895602337!5m2!1sen!2seg"
-              width="400" height="300" loading="lazy"></iframe>
-          </figure>
-        </section>
-
-        <section class="contact-form">
-
-          <h3 class="h3 form-title">Contact Form</h3>
-
-          <form action="#" class="form" data-form>
-
-            <div class="input-wrapper">
-              <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input>
-
-              <input type="email" name="email" class="form-input" placeholder="Email address" required data-form-input>
+          
+          <div class="other-projects">
+            <strong>And other projects:</strong>
+            <a href="https://github.com/OmarEhab007/ecommerce-store" target="_blank">E-Commerce Store</a> ✩
+            <a href="https://github.com/OmarEhab007" target="_blank">Self-Driving-Car-V2X</a> ✩
+            <a href="https://github.com/OmarEhab007" target="_blank">More on GitHub</a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Skills Box -->
+      <div class="box skills-box">
+        <div class="box-header">
+          <span class="moon-inline">☾</span> Skills & Tech Stack
+        </div>
+        <div class="box-content">
+          <div class="skills-grid">
+            <div class="skill-group">
+              <h4>Backend & Languages</h4>
+              <span class="skill-tag">Java</span>
+              <span class="skill-tag">Go</span>
+              <span class="skill-tag">TypeScript</span>
+              <span class="skill-tag">JavaScript</span>
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">Spring Boot</span>
+              <span class="skill-tag">Spring Cloud</span>
+              <span class="skill-tag">Node.js</span>
+              <span class="skill-tag">Next.js</span>
+              <span class="skill-tag">Fiber</span>
+              <span class="skill-tag">C++</span>
             </div>
-
-            <textarea name="message" class="form-input" placeholder="Your Message" required data-form-input></textarea>
-
-            <button class="form-btn" type="submit" disabled data-form-btn>
-              <ion-icon name="paper-plane"></ion-icon>
-              <span>Send Message</span>
-            </button>
-
-          </form>
-
-        </section>
-
-      </article>
-
+            <div class="skill-group">
+              <h4>Databases & Messaging</h4>
+              <span class="skill-tag">PostgreSQL</span>
+              <span class="skill-tag">SQL Server</span>
+              <span class="skill-tag">Oracle</span>
+              <span class="skill-tag">MongoDB</span>
+              <span class="skill-tag">Redis</span>
+              <span class="skill-tag">Kafka</span>
+              <span class="skill-tag">RabbitMQ</span>
+              <span class="skill-tag">gRPC</span>
+              <span class="skill-tag">REST API</span>
+            </div>
+            <div class="skill-group">
+              <h4>DevOps & Infrastructure</h4>
+              <span class="skill-tag">Docker</span>
+              <span class="skill-tag">Kubernetes</span>
+              <span class="skill-tag">Jenkins</span>
+              <span class="skill-tag">GitHub Actions</span>
+              <span class="skill-tag">Nginx</span>
+              <span class="skill-tag">Linux</span>
+              <span class="skill-tag">Prometheus</span>
+              <span class="skill-tag">Grafana</span>
+              <span class="skill-tag">Elasticsearch</span>
+              <span class="skill-tag">Maven</span>
+              <span class="skill-tag">Gradle</span>
+              <span class="skill-tag">AWS</span>
+            </div>
+            <div class="skill-group">
+              <h4>BMC Remedy</h4>
+              <span class="skill-tag">AR Server</span>
+              <span class="skill-tag">Developer Studio</span>
+              <span class="skill-tag">ITIL V4</span>
+              <span class="skill-tag">Smart IT</span>
+              <span class="skill-tag">BMC Remedy</span>
+              <span class="skill-tag">BMC Helix</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Blog Box -->
+      <div class="box blog-box">
+        <div class="box-header">
+          <span class="moon-inline">☾</span> Blog
+          <a href="blog.html" class="view-all-link" title="View all posts">View all →</a>
+        </div>
+        <div class="box-content">
+          <ul class="blog-list">
+            <li>
+              <span class="blog-bullet">-</span>
+              <a href="blog.html?post=building-retro-portfolio">Building a Retro Portfolio with Vanilla JS</a>
+              <span class="blog-date">— Thursday, Dec 25th, 2025</span>
+            </li>
+            <li>
+              <span class="blog-bullet">-</span>
+              <a href="blog.html?post=bmc-remedy-journey">My Journey with BMC Remedy ITSM</a>
+              <span class="blog-date">— Friday, Dec 20th, 2025</span>
+            </li>
+            <li>
+              <span class="blog-bullet">-</span>
+              <a href="blog.html?post=microservices-when-to-use">Microservices: When to Use (and When Not)</a>
+              <span class="blog-date">— Saturday, Dec 14th, 2025</span>
+            </li>
+            <li>
+              <span class="blog-bullet">-</span>
+              <a href="blog.html?post=spring-boot-best-practices">Spring Boot Best Practices in 2025</a>
+              <span class="blog-date">— Friday, Dec 6th, 2025</span>
+            </li>
+            <li>
+              <span class="blog-bullet">-</span>
+              <a href="blog.html?post=debugging-at-3am">The Art of Debugging at 3AM</a>
+              <span class="blog-date">— Wednesday, Nov 27th, 2025</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
     </div>
+    
+    <!-- Right Column -->
+    <div class="column column-right">
+      
+      <!-- Navigation Links -->
+      <div class="box links-box">
+        <div class="box-header">
+          <img src="./assets/images/electricity.png" alt="" class="elec-icon" onerror="this.outerHTML='⚡'">
+          Stars
+        </div>
+        <div class="box-content">
+          <ul class="nav-links">
+            <li><a href="#" class="nav-link">✩ Home</a></li>
+            <li><a href="blog.html" class="nav-link">✩ Blog</a></li>
+            <li><a href="https://github.com/OmarEhab007" target="_blank" class="nav-link">✩ GitHub</a></li>
+            <li><a href="https://www.linkedin.com/in/omar-e-a94808144/" target="_blank" class="nav-link">✩ LinkedIn</a></li>
+            <li><a href="mailto:oehab559@gmail.com" class="nav-link">✩ E-mail</a></li>
+            <li><a href="#guestbook" class="nav-link">✩ Guestbook</a></li>
+            <li><a href="./Omar_Ehab_resume.pdf" target="_blank" class="nav-link">✩ Resume</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- Current Status -->
+      <div class="box current-status-box">
+        <div class="box-header">✧ Current status:</div>
+        <div class="box-content">
+          <div class="twitter-status">
+            <span class="status-username">@omar_dev</span>
+            <p class="status-text" id="current-status-text">Probably debugging something at 3am ☕</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- System Status -->
+      <div class="box status-box">
+        <div class="box-header">Systems status: <span class="status-ok-text">OK</span></div>
+        <div class="box-content status-content">
+          <div class="status-item"><span class="status-ok">[ OK ]</span> omar.dev</div>
+          <div class="status-item"><span class="status-ok">[ OK ]</span> brain</div>
+          <div class="status-item"><span class="status-ok">[ OK ]</span> github</div>
+          <div class="status-item"><span class="status-ok">[ OK ]</span> api</div>
+          <div class="status-item clickable" id="coffee-status"><span class="status-warn">[ !! ]</span> coffee</div>
+          <!-- <div class="status-item"><span class="status-warn">[ ?? ]</span> sanity</div> -->
+        </div>
+      </div>
+      
+      <!-- Weather/Location Widget -->
+      <div class="box location-box">
+        <div class="box-header">📍 Location</div>
+        <div class="box-content">
+          <div class="location-info">
+            <span class="location-city">Riyadh, KSA</span>
+            <span class="location-time" id="local-time">--:--</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Online Status -->
+      <div class="box online-box">
+        <div class="online-indicator">
+          <span class="online-dot"></span>
+          <span class="online-text">I'm Online!</span>
+        </div>
+      </div>
+      
+      <!-- Now Playing -->
+      <div class="box nowplaying-box">
+        <div class="box-header">
+          <span class="moon-inline">☾</span> Last Song
+        </div>
+        <div class="box-content nowplaying-content">
+          <div class="track-info">
+            <a href="https://www.last.fm/music/M83/_/Midnight+City" target="_blank" class="track-link">
+              <span class="track-name" id="lastfm-track">Midnight City</span>
+              <span class="track-artist" id="lastfm-artist">M83</span>
+            </a>
+          </div>
+          <div class="track-time" id="lastfm-time">2 hours ago</div>
+        </div>
+      </div>
+      
+      <!-- Chat Widget -->
+      <div class="box chat-box">
+        <div class="box-header">
+          <img src="./assets/images/chat.png" alt="" class="chat-icon" onerror="this.outerHTML='💬'">
+          Chat
+        </div>
+        <div class="box-content">
+          <div class="chat-messages" id="chat-messages">
+            <div class="chat-msg">
+              <span class="chat-user system">System:</span>
+              <span class="chat-text">Welcome to the chat! 👋</span>
+            </div>
+            <div class="chat-msg">
+              <span class="chat-user visitor">Visitor_42:</span>
+              <span class="chat-text">Cool site!</span>
+            </div>
+            <div class="chat-msg">
+              <span class="chat-user omar">Omar:</span>
+              <span class="chat-text">Thanks! Feel free to say hi 😊</span>
+            </div>
+          </div>
+          <div class="chat-input-area">
+            <input type="text" id="chat-input" placeholder="Say something..." maxlength="100">
+            <button id="chat-send">Send</button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Banners -->
+      <div class="box banners-box">
+        <div class="box-header">
+          <img src="./assets/images/electricity_on.png" alt="" class="elec-icon" onerror="this.style.display='none'">
+          Banners
+        </div>
+        <div class="box-content banners-content">
+          <div class="banners-list">
+            <a href="https://github.com/OmarEhab007" target="_blank" class="banner-link floating" title="Electricity">
+              <img src="./assets/images/electricity_on.png" alt="Electricity" class="banner-img">
+            </a>
+            <a href="https://github.com/OmarEhab007" target="_blank" class="banner-link gliding" title="Kelvin">
+              <img src="./assets/images/kelvin.gif" alt="Kelvin" class="banner-img">
+            </a>
+            <a href="https://natu.moe" target="_blank" class="banner-link floating" title="Natu.moe">
+              <img src="./assets/images/natumoe.gif" alt="Natu.moe" class="banner-img">
+            </a>
+            <a href="https://github.com/OmarEhab007" target="_blank" class="banner-link gliding" title="Windows 95">
+              <img src="./assets/images/win95.gif" alt="Windows 95" class="banner-img">
+            </a>
+            <a href="https://fauux.neocities.org" target="_blank" class="banner-link floating" title="Fauux">
+              <img src="./assets/images/fauux.gif" alt="Fauux" class="banner-img">
+            </a>
+            <a href="https://github.com/OmarEhab007" target="_blank" class="banner-link gliding" title="Old Twitter">
+              <img src="./assets/images/oldtwitter.gif" alt="Old Twitter" class="banner-img">
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 88x31 Buttons -->
+      <div class="box buttons-box">
+        <div class="box-header">Buttons</div>
+        <div class="box-content buttons-content">
+          <div class="buttons-grid">
+            <!-- <a href="#" class="button-88x31" title="HTML5">
+              <span>HTML5</span>
+            </a> -->
+            <!-- <a href="#" class="button-88x31" title="CSS3">
+              <span>CSS3</span>
+            </a> -->
+            <!-- <a href="#" class="button-88x31" title="JavaScript">
+              <span>JS</span>
+            </a> -->
+            <a href="#" class="button-88x31" title="Java">
+              <span>JAVA</span>
+            </a>
+            <a href="#" class="button-88x31 special" title="Made with love">
+              <span>Made with ♥</span>
+            </a>
+            <!-- <a href="#" class="button-88x31" title="Web 1.0 Aesthetic">
+              <span>Web 1.0</span>
+            </a>
+            <a href="#" class="button-88x31" title="No AI Art">
+              <span>NO AI ART</span>
+            </a> -->
+            <a href="#" class="button-88x31" title="Works on my machine">
+              <span>WORKS™</span>
+            </a>
+          </div>
+          
+          <!-- <div class="cool-sites">
+            <p><em>&lt;-- cool sites</em></p>
+            <div class="cool-sites-buttons">
+              <a href="https://neocities.org" target="_blank" class="button-88x31-img" title="Neocities">
+                <span>neocities</span>
+              </a>
+            </div>
+          </div> -->
+          
+          <!-- My Button -->
+          <div class="my-button-section">
+            <div class="button-88x31 my-button">
+              <span>OMAR.DEV</span>
+            </div>
+            <div class="hotlink-code">
+              <code>&lt;a href="https://omar.dev"&gt;&lt;img src="..."&gt;&lt;/a&gt;</code>
+              <p class="hotlink-note">DO hotlink my button!</p>
+            </div>
+          </div>
+          
+          <!-- Webring -->
+          <div class="webring">
+            <a href="#" class="webring-link">&lt;--</a>
+            <span class="webring-name">Developer Webring</span>
+            <a href="#" class="webring-link">--&gt;</a>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    
+  </div>
+  
+  <!-- Footer -->
+  <footer class="site-footer">
+    <p>(c) 2024-2025 Omar Ehab. All Rights Reserved.</p>
+    <p><a href="mailto:oehab559@gmail.com">oehab559@gmail.com</a></p>
+  </footer>
 
-  </main>
-
-
-
-
-
-
-  <!--
-    - custom js link
-  -->
+  <!-- JavaScript -->
   <script src="./assets/js/script.js"></script>
-
-  <!--
-    - ionicon link
-  -->
-  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
 </body>
-
 </html>

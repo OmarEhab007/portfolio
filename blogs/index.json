@@ -1,0 +1,50 @@
+{
+  "blogs": [
+    {
+      "id": "building-retro-portfolio",
+      "title": "Building a Retro Portfolio with Vanilla JS",
+      "date": "2025-12-25",
+      "dateFormatted": "Thursday, Dec 25th, 2025",
+      "description": "Why I chose vanilla HTML, CSS, and JavaScript for my portfolio, and how I built the retro aesthetic.",
+      "tags": ["webdev", "javascript", "css", "portfolio"],
+      "file": "building-retro-portfolio.md"
+    },
+    {
+      "id": "bmc-remedy-journey",
+      "title": "My Journey with BMC Remedy ITSM",
+      "date": "2025-12-20",
+      "dateFormatted": "Friday, Dec 20th, 2025",
+      "description": "From confusion to competence: My experience learning BMC Remedy and becoming a certified developer.",
+      "tags": ["BMCRemedy", "ITSM", "Enterprise", "Automation"],
+      "file": "bmc-remedy-journey.md"
+    },
+    {
+      "id": "microservices-when-to-use",
+      "title": "Microservices: When to Use (and When Not)",
+      "date": "2025-12-14",
+      "dateFormatted": "Saturday, Dec 14th, 2025",
+      "description": "A practical guide to deciding between microservices and monoliths, based on real-world experience.",
+      "tags": ["architecture", "microservices", "monolith", "backend"],
+      "file": "microservices-when-to-use.md"
+    },
+    {
+      "id": "spring-boot-best-practices",
+      "title": "Spring Boot Best Practices in 2025",
+      "date": "2025-12-06",
+      "dateFormatted": "Friday, Dec 6th, 2025",
+      "description": "Battle-tested patterns and practices for building production-ready Spring Boot 3.x applications.",
+      "tags": ["java", "springboot", "backend", "bestpractices"],
+      "file": "spring-boot-best-practices.md"
+    },
+    {
+      "id": "debugging-at-3am",
+      "title": "The Art of Debugging at 3AM",
+      "date": "2025-11-27",
+      "dateFormatted": "Wednesday, Nov 27th, 2025",
+      "description": "War stories and practical tips for debugging production issues when everything is on fire.",
+      "tags": ["debugging", "devops", "oncall", "production"],
+      "file": "debugging-at-3am.md"
+    }
+  ]
+}
+
