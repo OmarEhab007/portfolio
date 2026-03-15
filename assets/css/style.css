@@ -691,279 +691,228 @@ button {
 }
 
 /*-----------------------------------*\
-  #BANNERS BOX
+  #LINKS & FLAIR BOX
 \*-----------------------------------*/
 
-.banners-content {
-  padding: 10px;
-  position: relative;
-  overflow: hidden;
-  background: var(--bg-box);
+.flair-content {
+  padding: 12px;
 }
 
-.banners-list {
+.flair-section {
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+  border-bottom: 1px dotted var(--border-main);
+}
+
+.flair-section:last-of-type {
+  border-bottom: none;
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+}
+
+.flair-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+
+/* Project Buttons */
+.flair-buttons {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  margin-bottom: 0;
-  position: relative;
-  z-index: 1;
 }
 
-.banner-link {
-  display: block;
+.flair-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-main);
+  color: var(--text-primary);
   text-decoration: none;
-  transition: all 0.3s ease;
-  position: relative;
-  max-width: 150px;
-  margin: 0 auto;
-  opacity: 0.8;
+  font-size: 14px;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.banner-img {
-  display: block;
-  width: 100%;
-  max-width: 150px;
-  height: auto;
-  image-rendering: pixelated;
-  image-rendering: -moz-crisp-edges;
-  image-rendering: crisp-edges;
-  transition: all 0.3s ease;
-  filter: brightness(0.85);
+.flair-btn:hover {
+  border-color: var(--text-cyan);
+  background: rgba(125, 211, 252, 0.05);
+  color: var(--text-cyan);
+  transform: translateX(4px);
 }
 
-/* Smooth banner animations */
-.banner-link .banner-img {
-  animation: bannerFloat 6s ease-in-out infinite;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+.flair-btn-icon {
+  font-size: 8px;
+  opacity: 0.5;
+  transition: opacity 0.25s;
 }
 
-.banner-link:nth-child(even) .banner-img {
-  animation-delay: -3s;
-}
-
-@keyframes bannerFloat {
-  0%, 100% {
-    transform: translateY(0) rotate(0deg);
-  }
-  25% {
-    transform: translateY(-4px) rotate(0.5deg);
-  }
-  75% {
-    transform: translateY(4px) rotate(-0.5deg);
-  }
-}
-
-/* 3D tilt on hover */
-.banner-link:hover .banner-img {
-  filter: brightness(1.3) drop-shadow(0 0 10px rgba(125, 211, 252, 0.6));
-  transform: scale(1.08) perspective(500px) rotateY(5deg);
+.flair-btn:hover .flair-btn-icon {
   opacity: 1;
 }
 
-.banner-link:active .banner-img {
-  transform: scale(0.95);
-}
-
-/* Staggered entrance for banners */
-.banner-link {
-  opacity: 0;
-  animation: bannerEnter 0.4s ease forwards;
-}
-
-.banner-link:nth-child(1) { animation-delay: 0.1s; }
-.banner-link:nth-child(2) { animation-delay: 0.2s; }
-.banner-link:nth-child(3) { animation-delay: 0.3s; }
-.banner-link:nth-child(4) { animation-delay: 0.4s; }
-.banner-link:nth-child(5) { animation-delay: 0.5s; }
-.banner-link:nth-child(6) { animation-delay: 0.6s; }
-
-@keyframes bannerEnter {
-  from {
-    opacity: 0;
-    transform: translateX(-10px);
-  }
-  to {
-    opacity: 0.8;
-    transform: translateX(0);
-  }
-}
-
-/*-----------------------------------*\
-  #88x31 BUTTONS
-\*-----------------------------------*/
-
-.buttons-content {
-  padding: 10px;
-}
-
-.buttons-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  margin-bottom: 15px;
-}
-
-.button-88x31 {
-  width: 88px;
-  height: 31px;
-  background: linear-gradient(180deg, #333 0%, #111 100%);
-  border: 1px solid var(--border-main);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-primary);
-  font-size: 10px;
-  text-transform: uppercase;
+.flair-btn-text {
+  font-family: var(--font-pixel);
+  font-size: 15px;
   letter-spacing: 0.5px;
-  transition: all var(--transition);
-  text-decoration: none;
 }
 
-.button-88x31:hover {
-  border-color: var(--text-cyan);
-  box-shadow: 0 0 8px rgba(125, 211, 252, 0.3);
-  color: var(--text-cyan);
+/* Project-specific accent colors */
+.flair-remedyiq {
+  border-left: 3px solid var(--text-green);
 }
 
-.button-88x31.special {
-  background: linear-gradient(180deg, #442266 0%, #221133 100%);
-  border-color: var(--text-pink);
-}
-
-.button-88x31.special:hover {
-  border-color: var(--text-pink);
-  box-shadow: 0 0 8px rgba(249, 168, 212, 0.3);
-  color: var(--text-pink);
-}
-
-/* Branded button variants */
-.button-88x31.brand-remedyiq {
-  background: linear-gradient(180deg, #1a3a2a 0%, #0a1510 100%);
+.flair-remedyiq:hover {
   border-color: var(--text-green);
-}
-
-.button-88x31.brand-remedyiq:hover {
-  border-color: var(--text-green);
-  box-shadow: 0 0 10px rgba(134, 239, 172, 0.4);
   color: var(--text-green);
+  box-shadow: 0 0 12px rgba(134, 239, 172, 0.15);
 }
 
-.button-88x31.brand-rag {
-  background: linear-gradient(180deg, #3a3a1a 0%, #151510 100%);
-  border-color: var(--text-yellow);
+.flair-rag {
+  border-left: 3px solid var(--text-yellow);
 }
 
-.button-88x31.brand-rag:hover {
+.flair-rag:hover {
   border-color: var(--text-yellow);
-  box-shadow: 0 0 10px rgba(253, 224, 71, 0.4);
   color: var(--text-yellow);
+  box-shadow: 0 0 12px rgba(253, 224, 71, 0.15);
 }
 
-.button-88x31.brand-tech {
-  background: linear-gradient(180deg, #2a2a3a 0%, #10101a 100%);
-  border-color: var(--text-purple);
-}
-
-.button-88x31.brand-tech:hover {
-  border-color: var(--text-purple);
-  box-shadow: 0 0 10px rgba(196, 181, 253, 0.4);
-  color: var(--text-purple);
-}
-
-.button-88x31.brand-dark {
-  background: linear-gradient(180deg, #2a2a1a 0%, #101008 100%);
-  border-color: var(--accent-moon);
-}
-
-.button-88x31.brand-dark:hover {
-  border-color: var(--accent-moon);
-  box-shadow: 0 0 10px rgba(255, 255, 212, 0.3);
-  color: var(--accent-moon);
-}
-
-.button-88x31-img {
-  width: 88px;
-  height: 31px;
-  background: linear-gradient(180deg, #222 0%, #0a0a0a 100%);
-  border: 1px solid var(--border-main);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 9px;
-  color: var(--text-secondary);
-  text-decoration: none;
-}
-
-.button-88x31-img:hover {
-  border-color: var(--accent-link);
-}
-
-.cool-sites {
-  margin-bottom: 15px;
-  padding-bottom: 15px;
-  border-bottom: 1px dotted var(--border-main);
-}
-
-.cool-sites p {
-  font-size: 14px;
-  color: var(--text-dim);
-  margin-bottom: 8px;
-}
-
-.cool-sites-buttons {
+/* Tech Stack Badges */
+.flair-badges {
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
+  gap: 6px;
 }
 
-.my-button-section {
-  margin-bottom: 15px;
-  padding-bottom: 15px;
-  border-bottom: 1px dotted var(--border-main);
-}
-
-.my-button {
-  background: linear-gradient(180deg, #1a3a5a 0%, #0a1520 100%);
-  border-color: var(--text-cyan);
-  margin-bottom: 8px;
-}
-
-.hotlink-code {
-  font-size: 12px;
-}
-
-.hotlink-code code {
-  display: block;
-  background: var(--bg-input);
-  padding: 5px;
+.flair-badge {
+  padding: 3px 10px;
+  font-size: 11px;
+  font-family: var(--font-pixel);
+  letter-spacing: 1px;
+  text-transform: uppercase;
   border: 1px solid var(--border-main);
-  color: var(--text-dim);
-  font-size: 10px;
-  word-break: break-all;
+  background: var(--bg-input);
+  color: var(--text-secondary);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.hotlink-note {
-  color: var(--text-green);
-  font-size: 12px;
-  margin-top: 5px;
+.flair-badge:hover {
+  transform: scale(1.08);
 }
 
-.webring {
-  display: flex;
+.badge-go {
+  border-color: #00add8;
+  color: #00add8;
+}
+
+.badge-go:hover {
+  box-shadow: 0 0 8px rgba(0, 173, 216, 0.3);
+  background: rgba(0, 173, 216, 0.08);
+}
+
+.badge-java {
+  border-color: #f89820;
+  color: #f89820;
+}
+
+.badge-java:hover {
+  box-shadow: 0 0 8px rgba(248, 152, 32, 0.3);
+  background: rgba(248, 152, 32, 0.08);
+}
+
+.badge-ts {
+  border-color: #3178c6;
+  color: #3178c6;
+}
+
+.badge-ts:hover {
+  box-shadow: 0 0 8px rgba(49, 120, 198, 0.3);
+  background: rgba(49, 120, 198, 0.08);
+}
+
+.badge-react {
+  border-color: #61dafb;
+  color: #61dafb;
+}
+
+.badge-react:hover {
+  box-shadow: 0 0 8px rgba(97, 218, 251, 0.3);
+  background: rgba(97, 218, 251, 0.08);
+}
+
+/* Retro GIF Wall */
+.flair-gifs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.flair-gif {
+  display: block;
+  overflow: hidden;
+  border: 1px solid var(--border-main);
+  opacity: 0.7;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.flair-gif img {
+  display: block;
+  width: 100%;
+  height: 48px;
+  object-fit: cover;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  filter: brightness(0.8) saturate(0.8);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.flair-gif:hover {
+  opacity: 1;
+  border-color: var(--text-cyan);
+  box-shadow: 0 0 10px rgba(125, 211, 252, 0.3);
+}
+
+.flair-gif:hover img {
+  filter: brightness(1.2) saturate(1.2);
+  transform: scale(1.05);
+}
+
+/* Identity Button */
+.flair-identity {
+  text-align: center;
+  padding-top: 4px;
+}
+
+.flair-omar {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  font-size: 14px;
-}
-
-.webring-link {
+  padding: 6px 16px;
+  background: linear-gradient(180deg, #1a3a5a 0%, #0a1520 100%);
+  border: 1px solid var(--text-cyan);
   color: var(--text-cyan);
-  font-weight: bold;
+  font-family: var(--font-pixel);
+  font-size: 14px;
+  letter-spacing: 1px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-bottom: 6px;
 }
 
-.webring-name {
-  color: var(--text-secondary);
+.flair-omar:hover {
+  box-shadow: 0 0 15px rgba(125, 211, 252, 0.4);
+  text-shadow: 0 0 8px rgba(125, 211, 252, 0.6);
+}
+
+.flair-tagline {
+  display: block;
+  font-size: 11px;
+  color: var(--text-dim);
+  font-style: italic;
 }
 
 /*-----------------------------------*\
@@ -1148,7 +1097,7 @@ textarea:focus-visible {
     gap: 15px;
   }
   
-  .buttons-box {
+  .flair-box {
     grid-column: 1 / -1;
   }
   
@@ -1182,7 +1131,7 @@ textarea:focus-visible {
     font-size: 15px;
   }
   
-  .buttons-grid {
+  .flair-badges {
     justify-content: center;
   }
 }
@@ -1268,16 +1217,13 @@ textarea:focus-visible {
     animation: none;
   }
 
-  .banner-link .banner-img {
-    animation: none;
-  }
-
-  .banner-link {
-    opacity: 0.8;
-    animation: none;
-  }
-
   .online-dot {
     animation: none;
+  }
+
+  .flair-btn,
+  .flair-badge,
+  .flair-gif {
+    transition: none;
   }
 }
