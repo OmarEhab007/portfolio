@@ -654,6 +654,33 @@ class SmoothScroll {
 }
 
 // ============================================
+// SCROLL REVEAL
+// ============================================
+
+class ScrollReveal {
+  constructor() {
+    this.boxes = document.querySelectorAll('.box');
+    this.observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const box = entry.target;
+            const delay = Array.from(this.boxes).indexOf(box) * 50;
+            setTimeout(() => {
+              box.classList.add('visible');
+            }, delay);
+            this.observer.unobserve(box);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    this.boxes.forEach(box => this.observer.observe(box));
+  }
+}
+
+// ============================================
 // INITIALIZE
 // ============================================
 
@@ -675,7 +702,10 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Navigation
   new SmoothScroll();
-  
+
+  // Scroll animations
+  new ScrollReveal();
+
   // Console
   showConsoleWelcome();
 });

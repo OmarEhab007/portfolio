@@ -157,6 +157,12 @@ button {
   background: var(--bg-box);
   border: 1px solid var(--border-main);
   border-radius: var(--border-radius);
+  transition: border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.box:hover {
+  border-color: var(--border-hover);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
 }
 
 .box-header {
@@ -273,8 +279,13 @@ button {
 }
 
 .blog-list li {
-  padding: 6px 0;
+  padding: 6px 4px;
   border-bottom: 1px dotted var(--border-main);
+  transition: background 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.blog-list li:hover {
+  background: rgba(125, 211, 252, 0.05);
 }
 
 .blog-list li:last-child {
@@ -310,6 +321,23 @@ button {
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  position: relative;
+}
+
+.project-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--text-cyan);
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 8px rgba(125, 211, 252, 0.4);
+}
+
+.project-link:hover::after {
+  width: 100%;
 }
 
 .project-icon {
@@ -366,6 +394,14 @@ button {
   padding: 2px 8px;
   margin: 2px;
   border: 1px solid var(--border-main);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.skill-tag:hover {
+  transform: scale(1.05);
+  border-color: var(--text-cyan);
+  color: var(--text-cyan);
+  box-shadow: 0 0 8px rgba(125, 211, 252, 0.2);
 }
 
 /*-----------------------------------*\
@@ -574,11 +610,12 @@ button {
   font-size: 16px;
   display: block;
   padding: 4px 8px;
-  transition: all var(--transition);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .nav-link:hover {
   background: rgba(147, 197, 253, 0.1);
+  padding-left: 14px;
 }
 
 /*-----------------------------------*\
@@ -1137,5 +1174,29 @@ button {
   to {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
+  }
+}
+
+/*-----------------------------------*\
+  #ENTRANCE ANIMATIONS
+\*-----------------------------------*/
+
+.box {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.box.visible {
+  animation: fadeSlideUp 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
