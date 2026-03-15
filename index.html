@@ -30,26 +30,49 @@
       <!-- Welcome Box -->
       <div class="box welcome-box">
         <div class="box-header">
-          <img src="./assets/images/moon.png" alt="" class="moon-icon" onerror="this.outerHTML='☾'">
+          <span class="moon-inline">☾</span>
           Welcome to OMAR.DEV!
           <img src="./assets/images/new-profile pic.png" alt="Omar" class="avatar-small" onerror="this.style.display='none'">
-          <a href="#" class="mood-link" id="mood-tracker" title="Mood tracker">[ +0.72 / -0.28 ]</a>
         </div>
+
+        <!-- GitHub Stats Bar -->
+        <div class="gh-stats-bar" id="gh-stats-bar">
+          <a href="https://github.com/OmarEhab007" target="_blank" class="gh-stat" title="Public repos">
+            <span class="gh-stat-icon">&#9744;</span>
+            <span class="gh-stat-val" id="gh-repos">--</span>
+            <span class="gh-stat-label">repos</span>
+          </a>
+          <a href="https://github.com/OmarEhab007?tab=stars" target="_blank" class="gh-stat" title="Total stars earned">
+            <span class="gh-stat-icon">&#9733;</span>
+            <span class="gh-stat-val" id="gh-stars">--</span>
+            <span class="gh-stat-label">stars</span>
+          </a>
+          <a href="https://github.com/OmarEhab007?tab=followers" target="_blank" class="gh-stat" title="Followers">
+            <span class="gh-stat-icon">&#9673;</span>
+            <span class="gh-stat-val" id="gh-followers">--</span>
+            <span class="gh-stat-label">followers</span>
+          </a>
+          <div class="gh-stat gh-stat-streak" title="Days coding this year">
+            <span class="gh-stat-icon">&#9889;</span>
+            <span class="gh-stat-val" id="gh-year-commits">--</span>
+            <span class="gh-stat-label">commits</span>
+          </div>
+          <a href="https://github.com/OmarEhab007" target="_blank" class="gh-stat gh-stat-link" title="View on GitHub">
+            <span class="gh-stat-label">github.com/<span class="text-cyan">OmarEhab007</span></span>
+          </a>
+        </div>
+
         <div class="box-content welcome-content">
-          <!-- <p>This is my <span class="highlight-text">li</span>t<span class="highlight-text">t</span>le website and portfolio with the old web aesthetic.</p> -->
-          
           <p>I'm a <span class="text-green">software engineer</span>. I build distributed systems, wrangle microservices, and occasionally convince BMC Remedy to behave.</p>
-          
+
           <p class="quick-facts-title">Some quick facts:</p>
           <ul class="quick-facts">
             <li>I'm from <span class="text-yellow">Egypt</span> (Cairo/Giza region)</li>
             <li>My main languages are <span class="text-cyan">Java</span>, <span class="text-cyan">Go</span>, and <span class="text-cyan">TypeScript</span></li>
-            <!-- <li>I love <span class="moon-inline">☾</span> the Moon and dark themes</li> -->
             <li>I work at <span class="text-green">CyberMak</span> as a BMC Remedy Developer</li>
             <li>4+ years of making servers happy</li>
-            <!-- <li>Coffee consumption: <span class="text-yellow">Critical</span></li> -->
           </ul>
-          
+
           <p>You can read more about me on my <a href="https://github.com/OmarEhab007" target="_blank">GitHub</a> or <a href="https://www.linkedin.com/in/omar-e-a94808144/" target="_blank">LinkedIn</a>!</p>
         </div>
       </div>

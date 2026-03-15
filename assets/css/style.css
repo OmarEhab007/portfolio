@@ -189,27 +189,97 @@ button {
   font-size: 18px;
 }
 
-.moon-icon {
-  width: 20px;
-  height: 20px;
-  image-rendering: pixelated;
-}
-
 .avatar-small {
   width: 32px;
   height: 32px;
   border-radius: 4px;
   margin-left: auto;
+  border: 1px solid var(--border-main);
 }
 
-.mood-link {
+/*-- GitHub Stats Bar --*/
+
+.gh-stats-bar {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 0;
+  background: var(--bg-input);
+  border-bottom: 1px solid var(--border-main);
+  font-size: 13px;
+  overflow-x: auto;
+}
+
+.gh-stat {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-right: 1px solid var(--border-main);
+  white-space: nowrap;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gh-stat:hover {
+  background: rgba(125, 211, 252, 0.08);
+  color: var(--text-cyan);
+}
+
+.gh-stat-icon {
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+.gh-stat:hover .gh-stat-icon {
+  color: var(--text-cyan);
+}
+
+.gh-stat-val {
+  color: var(--text-primary);
+  font-weight: bold;
+  font-family: var(--font-pixel);
   font-size: 14px;
-  color: var(--text-green);
-  margin-left: 10px;
 }
 
-.mood-link:hover {
+.gh-stat-label {
+  color: var(--text-dim);
+  font-size: 11px;
+}
+
+.gh-stat-streak .gh-stat-icon {
   color: var(--text-yellow);
+}
+
+.gh-stat-streak .gh-stat-val {
+  color: var(--text-green);
+}
+
+.gh-stat-link {
+  margin-left: auto;
+  border-right: none;
+  font-size: 12px;
+}
+
+.gh-stat-link .gh-stat-label {
+  color: var(--text-secondary);
+}
+
+/* Loading shimmer */
+.gh-stat-val.loading {
+  background: linear-gradient(90deg, var(--border-main) 25%, var(--border-hover) 50%, var(--border-main) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 2px;
+  color: transparent;
+  min-width: 20px;
+  display: inline-block;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
 
 .welcome-content {
@@ -1129,6 +1199,17 @@ textarea:focus-visible {
   
   .welcome-content {
     font-size: 15px;
+  }
+
+  .gh-stats-bar {
+    flex-wrap: wrap;
+  }
+
+  .gh-stat-link {
+    width: 100%;
+    border-top: 1px solid var(--border-main);
+    border-right: none;
+    justify-content: center;
   }
   
   .flair-badges {

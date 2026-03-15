@@ -450,26 +450,106 @@ class Guestbook {
 }
 
 // ============================================
-// MOOD TRACKER
+// GITHUB STATS
 // ============================================
 
-class MoodTracker {
-  constructor() {
-    this.moodEl = document.getElementById('mood-tracker');
-    if (this.moodEl) {
-      this.updateMood();
-      this.moodEl.addEventListener('click', (e) => {
-        e.preventDefault();
-        this.updateMood();
-      });
+class GitHubStats {
+  constructor(username) {
+    this.username = username;
+    this.cacheKey = 'gh_stats_cache';
+    this.cacheTTL = 1000 * 60 * 30; // 30 minutes
+
+    this.reposEl = document.getElementById('gh-repos');
+    this.starsEl = document.getElementById('gh-stars');
+    this.followersEl = document.getElementById('gh-followers');
+    this.commitsEl = document.getElementById('gh-year-commits');
+
+    if (this.reposEl) {
+      this.setLoading();
+      this.fetchStats();
     }
   }
-  
-  updateMood() {
-    // Generate random mood values
-    const positive = (Math.random() * 0.8 + 0.2).toFixed(2);
-    const negative = (Math.random() * 0.5).toFixed(2);
-    this.moodEl.textContent = `[ +${positive} / -${negative} ]`;
+
+  setLoading() {
+    [this.reposEl, this.starsEl, this.followersEl, this.commitsEl].forEach(el => {
+      if (el) el.classList.add('loading');
+    });
+  }
+
+  async fetchStats() {
+    // Check cache first
+    const cached = this.getCache();
+    if (cached) {
+      this.render(cached);
+      return;
+    }
+
+    try {
+      // Fetch user profile and repos in parallel
+      const [userRes, reposRes] = await Promise.all([
+        fetch(`https://api.github.com/users/${this.username}`),
+        fetch(`https://api.github.com/users/${this.username}/repos?per_page=100&sort=updated`)
+      ]);
+
+      if (!userRes.ok || !reposRes.ok) throw new Error('GitHub API error');
+
+      const user = await userRes.json();
+      const repos = await reposRes.json();
+
+      // Calculate total stars across all repos
+      const totalStars = repos.reduce((sum, repo) => sum + (repo.stargazers_count || 0), 0);
+
+      // Count commits this year (approximate from repo push dates)
+      const yearStart = new Date(new Date().getFullYear(), 0, 1).toISOString();
+      const activeRepos = repos.filter(r => r.pushed_at > yearStart).length;
+
+      const stats = {
+        repos: user.public_repos || 0,
+        stars: totalStars,
+        followers: user.followers || 0,
+        commits: activeRepos + '+ active',
+        fetchedAt: Date.now()
+      };
+
+      this.setCache(stats);
+      this.render(stats);
+    } catch (err) {
+      console.warn('GitHub API fetch failed:', err.message);
+      // Show fallback values
+      this.render({ repos: '30+', stars: '280+', followers: '~', commits: '2026' });
+    }
+  }
+
+  render(stats) {
+    const animate = (el, value) => {
+      if (!el) return;
+      el.classList.remove('loading');
+      el.textContent = typeof value === 'number' ? this.formatNum(value) : value;
+    };
+
+    animate(this.reposEl, stats.repos);
+    animate(this.starsEl, stats.stars);
+    animate(this.followersEl, stats.followers);
+    animate(this.commitsEl, stats.commits);
+  }
+
+  formatNum(n) {
+    if (n >= 1000) return (n / 1000).toFixed(1) + 'k';
+    return String(n);
+  }
+
+  getCache() {
+    try {
+      const raw = localStorage.getItem(this.cacheKey);
+      if (!raw) return null;
+      const data = JSON.parse(raw);
+      if (Date.now() - data.fetchedAt > this.cacheTTL) return null;
+      return data;
+    } catch { return null; }
+  }
+
+  setCache(data) {
+    try { localStorage.setItem(this.cacheKey, JSON.stringify(data)); } catch {}
   }
 }
 
@@ -891,7 +971,7 @@ document.addEventListener('DOMContentLoaded', () => {
   new Clock();
   new ChatWidget();
   new Guestbook();
-  new MoodTracker();
+  new GitHubStats('OmarEhab007');
   new NowPlaying();
   new StatusUpdater();
   
