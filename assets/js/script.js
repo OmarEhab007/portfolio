@@ -30,6 +30,17 @@ class BackgroundEffect {
     
     // Controls
     this.setupControls();
+
+    // Mouse parallax
+    this.mouseX = 0;
+    this.mouseY = 0;
+    document.addEventListener('mousemove', (e) => {
+      this.mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+      this.mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+    }, { passive: true });
+
+    // Frame rate limiting
+    this.lastFrame = 0;
   }
   
   init() {
@@ -90,12 +101,21 @@ class BackgroundEffect {
         y: Math.random() * this.canvas.height,
         length: Math.random() * 20 + 10,
         speed: Math.random() * 5 + 8,
-        opacity: Math.random() * 0.3 + 0.1
+        opacity: Math.random() * 0.3 + 0.1,
+        thickness: Math.random() * 1.5 + 0.5,
+        wind: Math.random() * 0.8 + 0.2
       });
     }
   }
   
   animate() {
+    const now = performance.now();
+    if (now - this.lastFrame < 33) {
+      requestAnimationFrame(() => this.animate());
+      return;
+    }
+    this.lastFrame = now;
+
     // Clear canvas
     this.ctx.fillStyle = '#0d0d0d';
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
@@ -137,23 +157,30 @@ class BackgroundEffect {
         star.y = 0;
       }
       
+      // Calculate parallax offset
+      const parallaxX = this.mouseX * star.size * 3;
+      const parallaxY = this.mouseY * star.size * 3;
+      const drawX = star.x + parallaxX;
+      const drawY = star.y + parallaxY;
+
       // Draw
       this.ctx.beginPath();
       this.ctx.fillStyle = `rgba(255, 255, 255, ${star.brightness * 0.8})`;
-      this.ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+      this.ctx.arc(drawX, drawY, star.size, 0, Math.PI * 2);
       this.ctx.fill();
-      
+
       // Glow for larger stars
-      if (star.size > 1.5) {
+      const glowRadius = star.size * 3;
+      if (star.size > 1.5 && glowRadius > 0 && isFinite(drawX) && isFinite(drawY)) {
         this.ctx.beginPath();
         const gradient = this.ctx.createRadialGradient(
-          star.x, star.y, 0,
-          star.x, star.y, star.size * 3
+          drawX, drawY, 0,
+          drawX, drawY, glowRadius
         );
         gradient.addColorStop(0, `rgba(255, 255, 255, ${star.brightness * 0.3})`);
         gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
         this.ctx.fillStyle = gradient;
-        this.ctx.arc(star.x, star.y, star.size * 3, 0, Math.PI * 2);
+        this.ctx.arc(drawX, drawY, glowRadius, 0, Math.PI * 2);
         this.ctx.fill();
       }
     });
@@ -164,17 +191,23 @@ class BackgroundEffect {
       // Draw raindrop
       this.ctx.beginPath();
       this.ctx.strokeStyle = `rgba(125, 211, 252, ${drop.opacity})`;
-      this.ctx.lineWidth = 1;
+      this.ctx.lineWidth = drop.thickness;
       this.ctx.moveTo(drop.x, drop.y);
       this.ctx.lineTo(drop.x, drop.y + drop.length);
       this.ctx.stroke();
-      
+
       // Move raindrop
       drop.y += drop.speed;
-      drop.x += 0.5; // Slight wind effect
-      
+      drop.x += drop.wind;
+
       // Reset if off screen
       if (drop.y > this.canvas.height) {
+        // Splash effect
+        this.ctx.beginPath();
+        this.ctx.fillStyle = `rgba(125, 211, 252, ${drop.opacity * 0.5})`;
+        this.ctx.arc(drop.x, this.canvas.height - 2, drop.thickness * 2, 0, Math.PI * 2);
+        this.ctx.fill();
+
         drop.y = -drop.length;
         drop.x = Math.random() * this.canvas.width;
       }
@@ -417,26 +450,106 @@ class Guestbook {
 }
 
 // ============================================
-// MOOD TRACKER
+// GITHUB STATS
 // ============================================
 
-class MoodTracker {
-  constructor() {
-    this.moodEl = document.getElementById('mood-tracker');
-    if (this.moodEl) {
-      this.updateMood();
-      this.moodEl.addEventListener('click', (e) => {
-        e.preventDefault();
-        this.updateMood();
-      });
+class GitHubStats {
+  constructor(username) {
+    this.username = username;
+    this.cacheKey = 'gh_stats_cache';
+    this.cacheTTL = 1000 * 60 * 30; // 30 minutes
+
+    this.reposEl = document.getElementById('gh-repos');
+    this.starsEl = document.getElementById('gh-stars');
+    this.followersEl = document.getElementById('gh-followers');
+    this.commitsEl = document.getElementById('gh-year-commits');
+
+    if (this.reposEl) {
+      this.setLoading();
+      this.fetchStats();
     }
   }
-  
-  updateMood() {
-    // Generate random mood values
-    const positive = (Math.random() * 0.8 + 0.2).toFixed(2);
-    const negative = (Math.random() * 0.5).toFixed(2);
-    this.moodEl.textContent = `[ +${positive} / -${negative} ]`;
+
+  setLoading() {
+    [this.reposEl, this.starsEl, this.followersEl, this.commitsEl].forEach(el => {
+      if (el) el.classList.add('loading');
+    });
+  }
+
+  async fetchStats() {
+    // Check cache first
+    const cached = this.getCache();
+    if (cached) {
+      this.render(cached);
+      return;
+    }
+
+    try {
+      // Fetch user profile and repos in parallel
+      const [userRes, reposRes] = await Promise.all([
+        fetch(`https://api.github.com/users/${this.username}`),
+        fetch(`https://api.github.com/users/${this.username}/repos?per_page=100&sort=updated`)
+      ]);
+
+      if (!userRes.ok || !reposRes.ok) throw new Error('GitHub API error');
+
+      const user = await userRes.json();
+      const repos = await reposRes.json();
+
+      // Calculate total stars across all repos
+      const totalStars = repos.reduce((sum, repo) => sum + (repo.stargazers_count || 0), 0);
+
+      // Count commits this year (approximate from repo push dates)
+      const yearStart = new Date(new Date().getFullYear(), 0, 1).toISOString();
+      const activeRepos = repos.filter(r => r.pushed_at > yearStart).length;
+
+      const stats = {
+        repos: user.public_repos || 0,
+        stars: totalStars,
+        followers: user.followers || 0,
+        commits: activeRepos + '+ active',
+        fetchedAt: Date.now()
+      };
+
+      this.setCache(stats);
+      this.render(stats);
+    } catch (err) {
+      console.warn('GitHub API fetch failed:', err.message);
+      // Show fallback values
+      this.render({ repos: '30+', stars: '280+', followers: '~', commits: '2026' });
+    }
+  }
+
+  render(stats) {
+    const animate = (el, value) => {
+      if (!el) return;
+      el.classList.remove('loading');
+      el.textContent = typeof value === 'number' ? this.formatNum(value) : value;
+    };
+
+    animate(this.reposEl, stats.repos);
+    animate(this.starsEl, stats.stars);
+    animate(this.followersEl, stats.followers);
+    animate(this.commitsEl, stats.commits);
+  }
+
+  formatNum(n) {
+    if (n >= 1000) return (n / 1000).toFixed(1) + 'k';
+    return String(n);
+  }
+
+  getCache() {
+    try {
+      const raw = localStorage.getItem(this.cacheKey);
+      if (!raw) return null;
+      const data = JSON.parse(raw);
+      if (Date.now() - data.fetchedAt > this.cacheTTL) return null;
+      return data;
+    } catch { return null; }
+  }
+
+  setCache(data) {
+    try { localStorage.setItem(this.cacheKey, JSON.stringify(data)); } catch {}
   }
 }
 
@@ -654,6 +767,199 @@ class SmoothScroll {
 }
 
 // ============================================
+// SCROLL REVEAL
+// ============================================
+
+class ScrollReveal {
+  constructor() {
+    document.body.classList.add('js-loaded');
+    this.boxes = document.querySelectorAll('.box');
+    this.boxIndexMap = new Map();
+    this.boxes.forEach((box, i) => this.boxIndexMap.set(box, i));
+
+    this.observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const box = entry.target;
+            const delay = this.boxIndexMap.get(box) * 50;
+            setTimeout(() => {
+              box.classList.add('visible');
+            }, delay);
+            this.observer.unobserve(box);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    this.boxes.forEach(box => this.observer.observe(box));
+  }
+}
+
+// ============================================
+// WANDERING PENGUIN
+// ============================================
+
+class WanderingPenguin {
+  constructor() {
+    this.el = document.createElement('div');
+    this.el.className = 'wandering-penguin';
+    this.el.title = 'Click me!';
+    this.el.innerHTML = this.renderPenguin();
+    document.body.appendChild(this.el);
+
+    // Position & movement
+    this.x = Math.random() * (window.innerWidth - 50);
+    this.y = Math.random() * (window.innerHeight - 60);
+    this.vx = (Math.random() - 0.5) * 1.5;
+    this.vy = (Math.random() - 0.5) * 1.5;
+    this.targetVx = this.vx;
+    this.targetVy = this.vy;
+    this.facingRight = this.vx > 0;
+
+    // State
+    this.state = 'walking'; // walking, idle, sleeping
+    this.stateTimer = 0;
+    this.idleDuration = 0;
+    this.bobPhase = 0;
+    this.clickCount = 0;
+
+    // Events
+    this.el.addEventListener('click', () => this.onClick());
+
+    // Start animation
+    this.lastFrame = performance.now();
+    this.animate();
+
+    // Change direction periodically
+    this.scheduleDirectionChange();
+  }
+
+  renderPenguin() {
+    return `<div class="penguin-body">
+      <div class="penguin-eye penguin-eye-left"></div>
+      <div class="penguin-eye penguin-eye-right"></div>
+      <div class="penguin-beak"></div>
+      <div class="penguin-belly"></div>
+      <div class="penguin-foot penguin-foot-left"></div>
+      <div class="penguin-foot penguin-foot-right"></div>
+    </div>`;
+  }
+
+  scheduleDirectionChange() {
+    const delay = 2000 + Math.random() * 4000;
+    setTimeout(() => {
+      if (this.state === 'walking') {
+        // Chance to stop and idle
+        if (Math.random() < 0.3) {
+          this.state = 'idle';
+          this.idleDuration = 1500 + Math.random() * 3000;
+          this.stateTimer = 0;
+          this.targetVx = 0;
+          this.targetVy = 0;
+        } else {
+          this.targetVx = (Math.random() - 0.5) * 2;
+          this.targetVy = (Math.random() - 0.5) * 1.2;
+        }
+      }
+      this.scheduleDirectionChange();
+    }, delay);
+  }
+
+  onClick() {
+    this.clickCount++;
+    // Penguin jumps and runs away from click
+    this.el.classList.add('penguin-jump');
+    setTimeout(() => this.el.classList.remove('penguin-jump'), 400);
+
+    // Run in opposite direction
+    this.targetVx = (Math.random() > 0.5 ? 1 : -1) * (2 + Math.random());
+    this.targetVy = (Math.random() - 0.5) * 2;
+    this.state = 'walking';
+
+    // Fun messages
+    const msgs = [
+      '🐧 *waddle waddle*',
+      '🐧 Hey! That tickles!',
+      '🐧 Noot noot!',
+      '🐧 Stop poking me!',
+      '🐧 I\'m walking here!',
+    ];
+    console.log(msgs[this.clickCount % msgs.length]);
+  }
+
+  animate() {
+    const now = performance.now();
+    const dt = Math.min((now - this.lastFrame) / 16.67, 3); // normalize to ~60fps
+    this.lastFrame = now;
+
+    // State management
+    if (this.state === 'idle') {
+      this.stateTimer += now - (this._lastNow || now);
+      if (this.stateTimer >= this.idleDuration) {
+        this.state = 'walking';
+        this.targetVx = (Math.random() - 0.5) * 2;
+        this.targetVy = (Math.random() - 0.5) * 1.2;
+      }
+    }
+    this._lastNow = now;
+
+    // Smooth velocity interpolation
+    this.vx += (this.targetVx - this.vx) * 0.05 * dt;
+    this.vy += (this.targetVy - this.vy) * 0.05 * dt;
+
+    // Update position
+    this.x += this.vx * dt;
+    this.y += this.vy * dt;
+
+    // Bounce off viewport edges
+    const maxX = window.innerWidth - 44;
+    const maxY = window.innerHeight - 56;
+    if (this.x <= 0) { this.x = 1; this.targetVx = Math.abs(this.targetVx) || 1; this.vx = Math.abs(this.vx); }
+    if (this.x >= maxX) { this.x = maxX - 1; this.targetVx = -Math.abs(this.targetVx) || -1; this.vx = -Math.abs(this.vx); }
+    if (this.y <= 0) { this.y = 1; this.targetVy = Math.abs(this.targetVy) || 0.5; this.vy = Math.abs(this.vy); }
+    if (this.y >= maxY) { this.y = maxY - 1; this.targetVy = -Math.abs(this.targetVy) || -0.5; this.vy = -Math.abs(this.vy); }
+    // Hard clamp
+    this.x = Math.max(0, Math.min(this.x, maxX));
+    this.y = Math.max(0, Math.min(this.y, maxY));
+
+    // Facing direction
+    if (Math.abs(this.vx) > 0.1) {
+      this.facingRight = this.vx > 0;
+    }
+
+    // Waddle bob
+    const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+    if (speed > 0.2) {
+      this.bobPhase += speed * 0.15 * dt;
+    }
+    const bob = Math.sin(this.bobPhase) * 2;
+    const tilt = Math.sin(this.bobPhase) * 3;
+
+    // Apply transform
+    const scaleX = this.facingRight ? 1 : -1;
+    this.el.style.transform = `translate(${this.x}px, ${this.y + bob}px) scaleX(${scaleX}) rotate(${tilt}deg)`;
+
+    // Foot animation
+    const feet = this.el.querySelectorAll('.penguin-foot');
+    if (speed > 0.2 && feet.length === 2) {
+      feet[0].style.transform = `translateX(${Math.sin(this.bobPhase) * 3}px)`;
+      feet[1].style.transform = `translateX(${Math.sin(this.bobPhase + Math.PI) * 3}px)`;
+    }
+
+    // Idle state visual
+    if (this.state === 'idle') {
+      this.el.classList.add('penguin-idle');
+    } else {
+      this.el.classList.remove('penguin-idle');
+    }
+
+    requestAnimationFrame(() => this.animate());
+  }
+}
+
+// ============================================
 // INITIALIZE
 // ============================================
 
@@ -665,7 +971,7 @@ document.addEventListener('DOMContentLoaded', () => {
   new Clock();
   new ChatWidget();
   new Guestbook();
-  new MoodTracker();
+  new GitHubStats('OmarEhab007');
   new NowPlaying();
   new StatusUpdater();
   
@@ -675,7 +981,13 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Navigation
   new SmoothScroll();
-  
+
+  // Scroll animations
+  new ScrollReveal();
+
+  // Wandering penguin
+  new WanderingPenguin();
+
   // Console
   showConsoleWelcome();
 });

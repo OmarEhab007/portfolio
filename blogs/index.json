@@ -1,6 +1,24 @@
 {
   "blogs": [
     {
+      "id": "building-remedyiq",
+      "title": "Building RemedyIQ: Enterprise Log Intelligence with Go & AI",
+      "date": "2026-03-15",
+      "dateFormatted": "Sunday, Mar 15th, 2026",
+      "description": "Architecture deep-dive into RemedyIQ — a 3-service Go platform for AR Server log analysis with AI-powered insights.",
+      "tags": ["go", "ai", "architecture", "clickhouse", "bmc-remedy"],
+      "file": "building-remedyiq.md"
+    },
+    {
+      "id": "building-rag-agent",
+      "title": "Building an Air-Gapped RAG Agent for BMC Remedy",
+      "date": "2026-03-10",
+      "dateFormatted": "Tuesday, Mar 10th, 2026",
+      "description": "How I built an on-premise RAG agent with LangChain4j, pgvector, and local embeddings for BMC Remedy ITSM.",
+      "tags": ["java", "rag", "ai", "langchain4j", "bmc-remedy"],
+      "file": "building-rag-agent.md"
+    },
+    {
       "id": "building-retro-portfolio",
       "title": "Building a Retro Portfolio with Vanilla JS",
       "date": "2025-12-25",

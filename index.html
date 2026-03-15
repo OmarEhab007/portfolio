@@ -30,26 +30,49 @@
       <!-- Welcome Box -->
       <div class="box welcome-box">
         <div class="box-header">
-          <img src="./assets/images/moon.png" alt="" class="moon-icon" onerror="this.outerHTML='☾'">
+          <span class="moon-inline">☾</span>
           Welcome to OMAR.DEV!
           <img src="./assets/images/new-profile pic.png" alt="Omar" class="avatar-small" onerror="this.style.display='none'">
-          <a href="#" class="mood-link" id="mood-tracker" title="Mood tracker">[ +0.72 / -0.28 ]</a>
         </div>
+
+        <!-- GitHub Stats Bar -->
+        <div class="gh-stats-bar" id="gh-stats-bar">
+          <a href="https://github.com/OmarEhab007" target="_blank" class="gh-stat" title="Public repos">
+            <span class="gh-stat-icon">&#9744;</span>
+            <span class="gh-stat-val" id="gh-repos">--</span>
+            <span class="gh-stat-label">repos</span>
+          </a>
+          <a href="https://github.com/OmarEhab007?tab=stars" target="_blank" class="gh-stat" title="Total stars earned">
+            <span class="gh-stat-icon">&#9733;</span>
+            <span class="gh-stat-val" id="gh-stars">--</span>
+            <span class="gh-stat-label">stars</span>
+          </a>
+          <a href="https://github.com/OmarEhab007?tab=followers" target="_blank" class="gh-stat" title="Followers">
+            <span class="gh-stat-icon">&#9673;</span>
+            <span class="gh-stat-val" id="gh-followers">--</span>
+            <span class="gh-stat-label">followers</span>
+          </a>
+          <div class="gh-stat gh-stat-streak" title="Days coding this year">
+            <span class="gh-stat-icon">&#9889;</span>
+            <span class="gh-stat-val" id="gh-year-commits">--</span>
+            <span class="gh-stat-label">commits</span>
+          </div>
+          <a href="https://github.com/OmarEhab007" target="_blank" class="gh-stat gh-stat-link" title="View on GitHub">
+            <span class="gh-stat-label">github.com/<span class="text-cyan">OmarEhab007</span></span>
+          </a>
+        </div>
+
         <div class="box-content welcome-content">
-          <!-- <p>This is my <span class="highlight-text">li</span>t<span class="highlight-text">t</span>le website and portfolio with the old web aesthetic.</p> -->
-          
           <p>I'm a <span class="text-green">software engineer</span>. I build distributed systems, wrangle microservices, and occasionally convince BMC Remedy to behave.</p>
-          
+
           <p class="quick-facts-title">Some quick facts:</p>
           <ul class="quick-facts">
             <li>I'm from <span class="text-yellow">Egypt</span> (Cairo/Giza region)</li>
             <li>My main languages are <span class="text-cyan">Java</span>, <span class="text-cyan">Go</span>, and <span class="text-cyan">TypeScript</span></li>
-            <!-- <li>I love <span class="moon-inline">☾</span> the Moon and dark themes</li> -->
             <li>I work at <span class="text-green">CyberMak</span> as a BMC Remedy Developer</li>
             <li>4+ years of making servers happy</li>
-            <!-- <li>Coffee consumption: <span class="text-yellow">Critical</span></li> -->
           </ul>
-          
+
           <p>You can read more about me on my <a href="https://github.com/OmarEhab007" target="_blank">GitHub</a> or <a href="https://www.linkedin.com/in/omar-e-a94808144/" target="_blank">LinkedIn</a>!</p>
         </div>
       </div>
@@ -96,6 +119,18 @@
         </div>
         <div class="box-content">
           <ul class="projects-list">
+            <li>
+              <a href="https://github.com/OmarEhab007/RemedyIQ" target="_blank" class="project-link">
+                <span class="project-icon">☾</span> RemedyIQ
+              </a>
+              <p class="project-desc">Enterprise log intelligence platform for BMC Remedy AR Server. Built with Go 1.24, Next.js 16, ClickHouse, NATS JetStream, and AI-powered analysis via Gemini & Anthropic. <a href="https://github.com/OmarEhab007/RemedyIQ" target="_blank">Link</a></p>
+            </li>
+            <li>
+              <a href="https://github.com/OmarEhab007/bmc-remedy-rag-agent" target="_blank" class="project-link">
+                <span class="project-icon">☾</span> BMC Remedy RAG Agent
+              </a>
+              <p class="project-desc">On-premise RAG agent for BMC Remedy ITSM with local embeddings and semantic search. Java 17, Spring Boot 3.2, LangChain4j, pgvector. 100% air-gapped. <a href="https://github.com/OmarEhab007/bmc-remedy-rag-agent" target="_blank">Link</a></p>
+            </li>
             <li>
               <a href="https://github.com/OmarEhab007/Data_Engineering_Mentorship" target="_blank" class="project-link">
                 <span class="project-icon">☾</span> Data Engineering Mentorship
@@ -158,6 +193,8 @@
               <span class="skill-tag">Next.js</span>
               <span class="skill-tag">Fiber</span>
               <span class="skill-tag">C++</span>
+              <span class="skill-tag">LangChain4j</span>
+              <span class="skill-tag">React</span>
             </div>
             <div class="skill-group">
               <h4>Databases & Messaging</h4>
@@ -170,6 +207,10 @@
               <span class="skill-tag">RabbitMQ</span>
               <span class="skill-tag">gRPC</span>
               <span class="skill-tag">REST API</span>
+              <span class="skill-tag">ClickHouse</span>
+              <span class="skill-tag">pgvector</span>
+              <span class="skill-tag">NATS JetStream</span>
+              <span class="skill-tag">MinIO</span>
             </div>
             <div class="skill-group">
               <h4>DevOps & Infrastructure</h4>
@@ -194,6 +235,8 @@
               <span class="skill-tag">Smart IT</span>
               <span class="skill-tag">BMC Remedy</span>
               <span class="skill-tag">BMC Helix</span>
+              <span class="skill-tag">AR Log Analysis</span>
+              <span class="skill-tag">ITSM Automation</span>
             </div>
           </div>
         </div>
@@ -207,6 +250,16 @@
         </div>
         <div class="box-content">
           <ul class="blog-list">
+            <li>
+              <span class="blog-bullet">-</span>
+              <a href="blog.html?post=building-remedyiq">Building RemedyIQ: Enterprise Log Intelligence with Go & AI</a>
+              <span class="blog-date">— Sunday, Mar 15th, 2026</span>
+            </li>
+            <li>
+              <span class="blog-bullet">-</span>
+              <a href="blog.html?post=building-rag-agent">Building an Air-Gapped RAG Agent for BMC Remedy</a>
+              <span class="blog-date">— Tuesday, Mar 10th, 2026</span>
+            </li>
             <li>
               <span class="blog-bullet">-</span>
               <a href="blog.html?post=building-retro-portfolio">Building a Retro Portfolio with Vanilla JS</a>
@@ -347,92 +400,63 @@
         </div>
       </div>
       
-      <!-- Banners -->
-      <div class="box banners-box">
+      <!-- Links & Flair -->
+      <div class="box flair-box">
         <div class="box-header">
-          <img src="./assets/images/electricity_on.png" alt="" class="elec-icon" onerror="this.style.display='none'">
-          Banners
+          <span class="moon-inline">☾</span> Links & Flair
         </div>
-        <div class="box-content banners-content">
-          <div class="banners-list">
-            <a href="https://github.com/OmarEhab007" target="_blank" class="banner-link floating" title="Electricity">
-              <img src="./assets/images/electricity_on.png" alt="Electricity" class="banner-img">
-            </a>
-            <a href="https://github.com/OmarEhab007" target="_blank" class="banner-link gliding" title="Kelvin">
-              <img src="./assets/images/kelvin.gif" alt="Kelvin" class="banner-img">
-            </a>
-            <a href="https://natu.moe" target="_blank" class="banner-link floating" title="Natu.moe">
-              <img src="./assets/images/natumoe.gif" alt="Natu.moe" class="banner-img">
-            </a>
-            <a href="https://github.com/OmarEhab007" target="_blank" class="banner-link gliding" title="Windows 95">
-              <img src="./assets/images/win95.gif" alt="Windows 95" class="banner-img">
-            </a>
-            <a href="https://fauux.neocities.org" target="_blank" class="banner-link floating" title="Fauux">
-              <img src="./assets/images/fauux.gif" alt="Fauux" class="banner-img">
-            </a>
-            <a href="https://github.com/OmarEhab007" target="_blank" class="banner-link gliding" title="Old Twitter">
-              <img src="./assets/images/oldtwitter.gif" alt="Old Twitter" class="banner-img">
-            </a>
-          </div>
-        </div>
-      </div>
-      
-      <!-- 88x31 Buttons -->
-      <div class="box buttons-box">
-        <div class="box-header">Buttons</div>
-        <div class="box-content buttons-content">
-          <div class="buttons-grid">
-            <!-- <a href="#" class="button-88x31" title="HTML5">
-              <span>HTML5</span>
-            </a> -->
-            <!-- <a href="#" class="button-88x31" title="CSS3">
-              <span>CSS3</span>
-            </a> -->
-            <!-- <a href="#" class="button-88x31" title="JavaScript">
-              <span>JS</span>
-            </a> -->
-            <a href="#" class="button-88x31" title="Java">
-              <span>JAVA</span>
-            </a>
-            <a href="#" class="button-88x31 special" title="Made with love">
-              <span>Made with ♥</span>
-            </a>
-            <!-- <a href="#" class="button-88x31" title="Web 1.0 Aesthetic">
-              <span>Web 1.0</span>
-            </a>
-            <a href="#" class="button-88x31" title="No AI Art">
-              <span>NO AI ART</span>
-            </a> -->
-            <a href="#" class="button-88x31" title="Works on my machine">
-              <span>WORKS™</span>
-            </a>
-          </div>
-          
-          <!-- <div class="cool-sites">
-            <p><em>&lt;-- cool sites</em></p>
-            <div class="cool-sites-buttons">
-              <a href="https://neocities.org" target="_blank" class="button-88x31-img" title="Neocities">
-                <span>neocities</span>
+        <div class="box-content flair-content">
+          <!-- Branded Project Buttons -->
+          <div class="flair-section">
+            <div class="flair-label">Projects</div>
+            <div class="flair-buttons">
+              <a href="https://github.com/OmarEhab007/RemedyIQ" target="_blank" class="flair-btn flair-remedyiq" title="RemedyIQ">
+                <span class="flair-btn-icon">&#9670;</span>
+                <span class="flair-btn-text">RemedyIQ</span>
+              </a>
+              <a href="https://github.com/OmarEhab007/bmc-remedy-rag-agent" target="_blank" class="flair-btn flair-rag" title="RAG Agent">
+                <span class="flair-btn-icon">&#9670;</span>
+                <span class="flair-btn-text">RAG Agent</span>
               </a>
             </div>
-          </div> -->
-          
-          <!-- My Button -->
-          <div class="my-button-section">
-            <div class="button-88x31 my-button">
-              <span>OMAR.DEV</span>
-            </div>
-            <div class="hotlink-code">
-              <code>&lt;a href="https://omar.dev"&gt;&lt;img src="..."&gt;&lt;/a&gt;</code>
-              <p class="hotlink-note">DO hotlink my button!</p>
+          </div>
+
+          <!-- Tech Stack Badges -->
+          <div class="flair-section">
+            <div class="flair-label">Stack</div>
+            <div class="flair-badges">
+              <span class="flair-badge badge-go">Go</span>
+              <span class="flair-badge badge-java">Java</span>
+              <span class="flair-badge badge-ts">TS</span>
+              <span class="flair-badge badge-react">React</span>
             </div>
           </div>
-          
-          <!-- Webring -->
-          <div class="webring">
-            <a href="#" class="webring-link">&lt;--</a>
-            <span class="webring-name">Developer Webring</span>
-            <a href="#" class="webring-link">--&gt;</a>
+
+          <!-- Retro GIF Wall -->
+          <div class="flair-section">
+            <div class="flair-label">Vibes</div>
+            <div class="flair-gifs">
+              <a href="https://fauux.neocities.org" target="_blank" class="flair-gif" title="Fauux">
+                <img src="./assets/images/fauux.gif" alt="Fauux">
+              </a>
+              <a href="https://natu.moe" target="_blank" class="flair-gif" title="Natu.moe">
+                <img src="./assets/images/natumoe.gif" alt="Natu.moe">
+              </a>
+              <a href="https://github.com/OmarEhab007" target="_blank" class="flair-gif" title="Kelvin">
+                <img src="./assets/images/kelvin.gif" alt="Kelvin">
+              </a>
+              <a href="https://github.com/OmarEhab007" target="_blank" class="flair-gif" title="Windows 95">
+                <img src="./assets/images/win95.gif" alt="Win95">
+              </a>
+            </div>
+          </div>
+
+          <!-- Identity Button -->
+          <div class="flair-identity">
+            <div class="flair-btn flair-omar">
+              <span>☾ OMAR.DEV</span>
+            </div>
+            <span class="flair-tagline">made with coffee & dark themes</span>
           </div>
         </div>
       </div>
@@ -443,7 +467,7 @@
   
   <!-- Footer -->
   <footer class="site-footer">
-    <p>(c) 2024-2025 Omar Ehab. All Rights Reserved.</p>
+    <p>(c) 2024-2026 Omar Ehab. All Rights Reserved.</p>
     <p><a href="mailto:oehab559@gmail.com">oehab559@gmail.com</a></p>
   </footer>
 
