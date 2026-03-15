@@ -1,6 +1,6 @@
 # Building an Air-Gapped RAG Agent for BMC Remedy with LangChain4j and pgvector
 
-*March 15, 2026*
+*March 10, 2026*
 
 ---
 

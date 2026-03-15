@@ -37,7 +37,7 @@ class BackgroundEffect {
     document.addEventListener('mousemove', (e) => {
       this.mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
       this.mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-    });
+    }, { passive: true });
 
     // Frame rate limiting
     this.lastFrame = 0;
@@ -691,13 +691,17 @@ class SmoothScroll {
 
 class ScrollReveal {
   constructor() {
+    document.body.classList.add('js-loaded');
     this.boxes = document.querySelectorAll('.box');
+    this.boxIndexMap = new Map();
+    this.boxes.forEach((box, i) => this.boxIndexMap.set(box, i));
+
     this.observer = new IntersectionObserver(
       (entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             const box = entry.target;
-            const delay = Array.from(this.boxes).indexOf(box) * 50;
+            const delay = this.boxIndexMap.get(box) * 50;
             setTimeout(() => {
               box.classList.add('visible');
             }, delay);
