@@ -1089,8 +1089,8 @@ button {
 \*-----------------------------------*/
 
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -1099,10 +1099,17 @@ button {
 
 ::-webkit-scrollbar-thumb {
   background: var(--border-main);
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--border-hover);
+  background: var(--text-cyan);
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-main) var(--bg-dark);
 }
 
 /*-----------------------------------*\
@@ -1112,6 +1119,18 @@ button {
 ::selection {
   background: var(--text-pink);
   color: var(--bg-dark);
+}
+
+/*-----------------------------------*\
+  #FOCUS STATES
+\*-----------------------------------*/
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--text-cyan);
+  outline-offset: 2px;
 }
 
 /*-----------------------------------*\
