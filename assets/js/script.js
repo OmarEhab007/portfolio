@@ -170,16 +170,17 @@ class BackgroundEffect {
       this.ctx.fill();
 
       // Glow for larger stars
-      if (star.size > 1.5) {
+      const glowRadius = star.size * 3;
+      if (star.size > 1.5 && glowRadius > 0 && isFinite(drawX) && isFinite(drawY)) {
         this.ctx.beginPath();
         const gradient = this.ctx.createRadialGradient(
           drawX, drawY, 0,
-          drawX, drawY, star.size * 3
+          drawX, drawY, glowRadius
         );
         gradient.addColorStop(0, `rgba(255, 255, 255, ${star.brightness * 0.3})`);
         gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
         this.ctx.fillStyle = gradient;
-        this.ctx.arc(drawX, drawY, star.size * 3, 0, Math.PI * 2);
+        this.ctx.arc(drawX, drawY, glowRadius, 0, Math.PI * 2);
         this.ctx.fill();
       }
     });
