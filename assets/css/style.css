@@ -1137,6 +1137,131 @@ textarea:focus-visible {
 }
 
 /*-----------------------------------*\
+  #WANDERING PENGUIN
+\*-----------------------------------*/
+
+.wandering-penguin {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  cursor: pointer;
+  pointer-events: auto;
+  will-change: transform;
+  transition: filter 0.3s;
+}
+
+.wandering-penguin:hover {
+  filter: drop-shadow(0 0 8px rgba(125, 211, 252, 0.6));
+}
+
+.penguin-body {
+  position: relative;
+  width: 32px;
+  height: 40px;
+  background: #1a1a2e;
+  border-radius: 40% 40% 45% 45%;
+  border: 2px solid #2a2a4a;
+  overflow: visible;
+}
+
+.penguin-belly {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 18px;
+  height: 22px;
+  background: #e8e8e8;
+  border-radius: 50% 50% 45% 45%;
+}
+
+.penguin-eye {
+  position: absolute;
+  top: 10px;
+  width: 6px;
+  height: 7px;
+  background: #fff;
+  border-radius: 50%;
+}
+
+.penguin-eye::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  right: 1px;
+  width: 3px;
+  height: 3px;
+  background: #111;
+  border-radius: 50%;
+}
+
+.penguin-eye-left {
+  left: 6px;
+}
+
+.penguin-eye-right {
+  right: 6px;
+}
+
+.penguin-beak {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid #f89820;
+}
+
+.penguin-foot {
+  position: absolute;
+  bottom: -5px;
+  width: 10px;
+  height: 5px;
+  background: #f89820;
+  border-radius: 0 0 50% 50%;
+}
+
+.penguin-foot-left {
+  left: 4px;
+}
+
+.penguin-foot-right {
+  right: 4px;
+}
+
+/* Idle state - penguin looks around */
+.penguin-idle .penguin-eye::after {
+  animation: penguinLook 2s ease-in-out infinite;
+}
+
+@keyframes penguinLook {
+  0%, 100% { transform: translateX(0); }
+  30% { transform: translateX(-2px); }
+  70% { transform: translateX(2px); }
+}
+
+/* Jump on click */
+.penguin-jump {
+  animation: penguinJump 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes penguinJump {
+  0%, 100% { margin-top: 0; }
+  50% { margin-top: -20px; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .wandering-penguin {
+    display: none;
+  }
+}
+
+/*-----------------------------------*\
   #RAIN DROPS (for rain effect)
 \*-----------------------------------*/
 

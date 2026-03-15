@@ -718,6 +718,168 @@ class ScrollReveal {
 }
 
 // ============================================
+// WANDERING PENGUIN
+// ============================================
+
+class WanderingPenguin {
+  constructor() {
+    this.el = document.createElement('div');
+    this.el.className = 'wandering-penguin';
+    this.el.title = 'Click me!';
+    this.el.innerHTML = this.renderPenguin();
+    document.body.appendChild(this.el);
+
+    // Position & movement
+    this.x = Math.random() * (window.innerWidth - 50);
+    this.y = Math.random() * (window.innerHeight - 60);
+    this.vx = (Math.random() - 0.5) * 1.5;
+    this.vy = (Math.random() - 0.5) * 1.5;
+    this.targetVx = this.vx;
+    this.targetVy = this.vy;
+    this.facingRight = this.vx > 0;
+
+    // State
+    this.state = 'walking'; // walking, idle, sleeping
+    this.stateTimer = 0;
+    this.idleDuration = 0;
+    this.bobPhase = 0;
+    this.clickCount = 0;
+
+    // Events
+    this.el.addEventListener('click', () => this.onClick());
+
+    // Start animation
+    this.lastFrame = performance.now();
+    this.animate();
+
+    // Change direction periodically
+    this.scheduleDirectionChange();
+  }
+
+  renderPenguin() {
+    return `<div class="penguin-body">
+      <div class="penguin-eye penguin-eye-left"></div>
+      <div class="penguin-eye penguin-eye-right"></div>
+      <div class="penguin-beak"></div>
+      <div class="penguin-belly"></div>
+      <div class="penguin-foot penguin-foot-left"></div>
+      <div class="penguin-foot penguin-foot-right"></div>
+    </div>`;
+  }
+
+  scheduleDirectionChange() {
+    const delay = 2000 + Math.random() * 4000;
+    setTimeout(() => {
+      if (this.state === 'walking') {
+        // Chance to stop and idle
+        if (Math.random() < 0.3) {
+          this.state = 'idle';
+          this.idleDuration = 1500 + Math.random() * 3000;
+          this.stateTimer = 0;
+          this.targetVx = 0;
+          this.targetVy = 0;
+        } else {
+          this.targetVx = (Math.random() - 0.5) * 2;
+          this.targetVy = (Math.random() - 0.5) * 1.2;
+        }
+      }
+      this.scheduleDirectionChange();
+    }, delay);
+  }
+
+  onClick() {
+    this.clickCount++;
+    // Penguin jumps and runs away from click
+    this.el.classList.add('penguin-jump');
+    setTimeout(() => this.el.classList.remove('penguin-jump'), 400);
+
+    // Run in opposite direction
+    this.targetVx = (Math.random() > 0.5 ? 1 : -1) * (2 + Math.random());
+    this.targetVy = (Math.random() - 0.5) * 2;
+    this.state = 'walking';
+
+    // Fun messages
+    const msgs = [
+      '🐧 *waddle waddle*',
+      '🐧 Hey! That tickles!',
+      '🐧 Noot noot!',
+      '🐧 Stop poking me!',
+      '🐧 I\'m walking here!',
+    ];
+    console.log(msgs[this.clickCount % msgs.length]);
+  }
+
+  animate() {
+    const now = performance.now();
+    const dt = Math.min((now - this.lastFrame) / 16.67, 3); // normalize to ~60fps
+    this.lastFrame = now;
+
+    // State management
+    if (this.state === 'idle') {
+      this.stateTimer += now - (this._lastNow || now);
+      if (this.stateTimer >= this.idleDuration) {
+        this.state = 'walking';
+        this.targetVx = (Math.random() - 0.5) * 2;
+        this.targetVy = (Math.random() - 0.5) * 1.2;
+      }
+    }
+    this._lastNow = now;
+
+    // Smooth velocity interpolation
+    this.vx += (this.targetVx - this.vx) * 0.05 * dt;
+    this.vy += (this.targetVy - this.vy) * 0.05 * dt;
+
+    // Update position
+    this.x += this.vx * dt;
+    this.y += this.vy * dt;
+
+    // Bounce off viewport edges
+    const maxX = window.innerWidth - 40;
+    const maxY = window.innerHeight - 50;
+    if (this.x <= 0) { this.x = 1; this.targetVx = Math.abs(this.targetVx) || 1; this.vx = Math.abs(this.vx); }
+    if (this.x >= maxX) { this.x = maxX - 1; this.targetVx = -Math.abs(this.targetVx) || -1; this.vx = -Math.abs(this.vx); }
+    if (this.y <= 0) { this.y = 1; this.targetVy = Math.abs(this.targetVy) || 0.5; this.vy = Math.abs(this.vy); }
+    if (this.y >= maxY) { this.y = maxY - 1; this.targetVy = -Math.abs(this.targetVy) || -0.5; this.vy = -Math.abs(this.vy); }
+    // Hard clamp
+    this.x = Math.max(0, Math.min(this.x, maxX));
+    this.y = Math.max(0, Math.min(this.y, maxY));
+
+    // Facing direction
+    if (Math.abs(this.vx) > 0.1) {
+      this.facingRight = this.vx > 0;
+    }
+
+    // Waddle bob
+    const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+    if (speed > 0.2) {
+      this.bobPhase += speed * 0.15 * dt;
+    }
+    const bob = Math.sin(this.bobPhase) * 2;
+    const tilt = Math.sin(this.bobPhase) * 3;
+
+    // Apply transform
+    const scaleX = this.facingRight ? 1 : -1;
+    this.el.style.transform = `translate(${this.x}px, ${this.y + bob}px) scaleX(${scaleX}) rotate(${tilt}deg)`;
+
+    // Foot animation
+    const feet = this.el.querySelectorAll('.penguin-foot');
+    if (speed > 0.2 && feet.length === 2) {
+      feet[0].style.transform = `translateX(${Math.sin(this.bobPhase) * 3}px)`;
+      feet[1].style.transform = `translateX(${Math.sin(this.bobPhase + Math.PI) * 3}px)`;
+    }
+
+    // Idle state visual
+    if (this.state === 'idle') {
+      this.el.classList.add('penguin-idle');
+    } else {
+      this.el.classList.remove('penguin-idle');
+    }
+
+    requestAnimationFrame(() => this.animate());
+  }
+}
+
+// ============================================
 // INITIALIZE
 // ============================================
 
@@ -742,6 +904,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Scroll animations
   new ScrollReveal();
+
+  // Wandering penguin
+  new WanderingPenguin();
 
   // Console
   showConsoleWelcome();
