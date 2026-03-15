@@ -834,8 +834,8 @@ class WanderingPenguin {
     this.y += this.vy * dt;
 
     // Bounce off viewport edges
-    const maxX = window.innerWidth - 40;
-    const maxY = window.innerHeight - 50;
+    const maxX = window.innerWidth - 44;
+    const maxY = window.innerHeight - 56;
     if (this.x <= 0) { this.x = 1; this.targetVx = Math.abs(this.targetVx) || 1; this.vx = Math.abs(this.vx); }
     if (this.x >= maxX) { this.x = maxX - 1; this.targetVx = -Math.abs(this.targetVx) || -1; this.vx = -Math.abs(this.vx); }
     if (this.y <= 0) { this.y = 1; this.targetVy = Math.abs(this.targetVy) || 0.5; this.vy = Math.abs(this.vy); }
