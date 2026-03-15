@@ -732,72 +732,61 @@ button {
   filter: brightness(0.85);
 }
 
-/* Floating banners animation - gentle up and down */
-.banner-link.floating .banner-img {
-  animation: float 4s ease-in-out infinite;
+/* Smooth banner animations */
+.banner-link .banner-img {
+  animation: bannerFloat 6s ease-in-out infinite;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@keyframes float {
+.banner-link:nth-child(even) .banner-img {
+  animation-delay: -3s;
+}
+
+@keyframes bannerFloat {
   0%, 100% {
-    transform: translateY(0px);
+    transform: translateY(0) rotate(0deg);
   }
-  50% {
-    transform: translateY(-8px);
+  25% {
+    transform: translateY(-4px) rotate(0.5deg);
   }
-}
-
-/* Gliding banners animation - subtle horizontal movement */
-.banner-link.gliding .banner-img {
-  animation: glide 5s ease-in-out infinite;
-}
-
-@keyframes glide {
-  0%, 100% {
-    transform: translateX(0px);
-  }
-  50% {
-    transform: translateX(8px);
+  75% {
+    transform: translateY(4px) rotate(-0.5deg);
   }
 }
 
-/* Neon glow effects on hover */
+/* 3D tilt on hover */
 .banner-link:hover .banner-img {
-  filter: brightness(1.3) drop-shadow(0 0 8px rgba(125, 211, 252, 0.8)) drop-shadow(0 0 12px rgba(125, 211, 252, 0.6)) drop-shadow(0 0 16px rgba(125, 211, 252, 0.4));
-  transform: scale(1.05);
+  filter: brightness(1.3) drop-shadow(0 0 10px rgba(125, 211, 252, 0.6));
+  transform: scale(1.08) perspective(500px) rotateY(5deg);
   opacity: 1;
-}
-
-.banner-link:hover {
-  opacity: 1;
-}
-
-/* Variant neon effects for different banners */
-.banner-link:nth-child(1):hover .banner-img {
-  filter: brightness(1.4) drop-shadow(0 0 10px rgba(255, 255, 255, 0.9)) drop-shadow(0 0 15px rgba(255, 255, 255, 0.7)) drop-shadow(0 0 20px rgba(255, 255, 255, 0.5));
-}
-
-.banner-link:nth-child(2):hover .banner-img {
-  filter: brightness(1.3) drop-shadow(0 0 8px rgba(249, 168, 212, 0.8)) drop-shadow(0 0 12px rgba(249, 168, 212, 0.6)) drop-shadow(0 0 16px rgba(249, 168, 212, 0.4));
-}
-
-.banner-link:nth-child(3):hover .banner-img {
-  filter: brightness(1.35) drop-shadow(0 0 9px rgba(125, 211, 252, 0.85)) drop-shadow(0 0 14px rgba(125, 211, 252, 0.65)) drop-shadow(0 0 18px rgba(125, 211, 252, 0.45));
-}
-
-.banner-link:nth-child(4):hover .banner-img {
-  filter: brightness(1.3) drop-shadow(0 0 8px rgba(253, 224, 71, 0.8)) drop-shadow(0 0 12px rgba(253, 224, 71, 0.6)) drop-shadow(0 0 16px rgba(253, 224, 71, 0.4));
-}
-
-.banner-link:nth-child(5):hover .banner-img {
-  filter: brightness(1.3) drop-shadow(0 0 8px rgba(249, 168, 212, 0.8)) drop-shadow(0 0 12px rgba(249, 168, 212, 0.6)) drop-shadow(0 0 16px rgba(249, 168, 212, 0.4));
-}
-
-.banner-link:nth-child(6):hover .banner-img {
-  filter: brightness(1.3) drop-shadow(0 0 8px rgba(125, 211, 252, 0.8)) drop-shadow(0 0 12px rgba(125, 211, 252, 0.6)) drop-shadow(0 0 16px rgba(125, 211, 252, 0.4));
 }
 
 .banner-link:active .banner-img {
   transform: scale(0.95);
+}
+
+/* Staggered entrance for banners */
+.banner-link {
+  opacity: 0;
+  animation: bannerEnter 0.4s ease forwards;
+}
+
+.banner-link:nth-child(1) { animation-delay: 0.1s; }
+.banner-link:nth-child(2) { animation-delay: 0.2s; }
+.banner-link:nth-child(3) { animation-delay: 0.3s; }
+.banner-link:nth-child(4) { animation-delay: 0.4s; }
+.banner-link:nth-child(5) { animation-delay: 0.5s; }
+.banner-link:nth-child(6) { animation-delay: 0.6s; }
+
+@keyframes bannerEnter {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 0.8;
+    transform: translateX(0);
+  }
 }
 
 /*-----------------------------------*\
@@ -846,6 +835,51 @@ button {
   border-color: var(--text-pink);
   box-shadow: 0 0 8px rgba(249, 168, 212, 0.3);
   color: var(--text-pink);
+}
+
+/* Branded button variants */
+.button-88x31.brand-remedyiq {
+  background: linear-gradient(180deg, #1a3a2a 0%, #0a1510 100%);
+  border-color: var(--text-green);
+}
+
+.button-88x31.brand-remedyiq:hover {
+  border-color: var(--text-green);
+  box-shadow: 0 0 10px rgba(134, 239, 172, 0.4);
+  color: var(--text-green);
+}
+
+.button-88x31.brand-rag {
+  background: linear-gradient(180deg, #3a3a1a 0%, #151510 100%);
+  border-color: var(--text-yellow);
+}
+
+.button-88x31.brand-rag:hover {
+  border-color: var(--text-yellow);
+  box-shadow: 0 0 10px rgba(253, 224, 71, 0.4);
+  color: var(--text-yellow);
+}
+
+.button-88x31.brand-tech {
+  background: linear-gradient(180deg, #2a2a3a 0%, #10101a 100%);
+  border-color: var(--text-purple);
+}
+
+.button-88x31.brand-tech:hover {
+  border-color: var(--text-purple);
+  box-shadow: 0 0 10px rgba(196, 181, 253, 0.4);
+  color: var(--text-purple);
+}
+
+.button-88x31.brand-dark {
+  background: linear-gradient(180deg, #2a2a1a 0%, #101008 100%);
+  border-color: var(--accent-moon);
+}
+
+.button-88x31.brand-dark:hover {
+  border-color: var(--accent-moon);
+  box-shadow: 0 0 10px rgba(255, 255, 212, 0.3);
+  color: var(--accent-moon);
 }
 
 .button-88x31-img {

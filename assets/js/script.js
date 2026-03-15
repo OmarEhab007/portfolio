@@ -30,6 +30,17 @@ class BackgroundEffect {
     
     // Controls
     this.setupControls();
+
+    // Mouse parallax
+    this.mouseX = 0;
+    this.mouseY = 0;
+    document.addEventListener('mousemove', (e) => {
+      this.mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+      this.mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+    });
+
+    // Frame rate limiting
+    this.lastFrame = 0;
   }
   
   init() {
@@ -90,12 +101,21 @@ class BackgroundEffect {
         y: Math.random() * this.canvas.height,
         length: Math.random() * 20 + 10,
         speed: Math.random() * 5 + 8,
-        opacity: Math.random() * 0.3 + 0.1
+        opacity: Math.random() * 0.3 + 0.1,
+        thickness: Math.random() * 1.5 + 0.5,
+        wind: Math.random() * 0.8 + 0.2
       });
     }
   }
   
   animate() {
+    const now = performance.now();
+    if (now - this.lastFrame < 33) {
+      requestAnimationFrame(() => this.animate());
+      return;
+    }
+    this.lastFrame = now;
+
     // Clear canvas
     this.ctx.fillStyle = '#0d0d0d';
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
@@ -137,23 +157,29 @@ class BackgroundEffect {
         star.y = 0;
       }
       
+      // Calculate parallax offset
+      const parallaxX = this.mouseX * star.size * 3;
+      const parallaxY = this.mouseY * star.size * 3;
+      const drawX = star.x + parallaxX;
+      const drawY = star.y + parallaxY;
+
       // Draw
       this.ctx.beginPath();
       this.ctx.fillStyle = `rgba(255, 255, 255, ${star.brightness * 0.8})`;
-      this.ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+      this.ctx.arc(drawX, drawY, star.size, 0, Math.PI * 2);
       this.ctx.fill();
-      
+
       // Glow for larger stars
       if (star.size > 1.5) {
         this.ctx.beginPath();
         const gradient = this.ctx.createRadialGradient(
-          star.x, star.y, 0,
-          star.x, star.y, star.size * 3
+          drawX, drawY, 0,
+          drawX, drawY, star.size * 3
         );
         gradient.addColorStop(0, `rgba(255, 255, 255, ${star.brightness * 0.3})`);
         gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
         this.ctx.fillStyle = gradient;
-        this.ctx.arc(star.x, star.y, star.size * 3, 0, Math.PI * 2);
+        this.ctx.arc(drawX, drawY, star.size * 3, 0, Math.PI * 2);
         this.ctx.fill();
       }
     });
@@ -164,17 +190,23 @@ class BackgroundEffect {
       // Draw raindrop
       this.ctx.beginPath();
       this.ctx.strokeStyle = `rgba(125, 211, 252, ${drop.opacity})`;
-      this.ctx.lineWidth = 1;
+      this.ctx.lineWidth = drop.thickness;
       this.ctx.moveTo(drop.x, drop.y);
       this.ctx.lineTo(drop.x, drop.y + drop.length);
       this.ctx.stroke();
-      
+
       // Move raindrop
       drop.y += drop.speed;
-      drop.x += 0.5; // Slight wind effect
-      
+      drop.x += drop.wind;
+
       // Reset if off screen
       if (drop.y > this.canvas.height) {
+        // Splash effect
+        this.ctx.beginPath();
+        this.ctx.fillStyle = `rgba(125, 211, 252, ${drop.opacity * 0.5})`;
+        this.ctx.arc(drop.x, this.canvas.height - 2, drop.thickness * 2, 0, Math.PI * 2);
+        this.ctx.fill();
+
         drop.y = -drop.length;
         drop.x = Math.random() * this.canvas.width;
       }
