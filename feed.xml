@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>OMAR.DEV — Blog</title>
+    <link>https://omar.dev/blog.html</link>
+    <description>Backend engineering, distributed systems, BMC Remedy ITSM, and occasional 3AM debugging stories.</description>
+    <language>en-us</language>
+    <copyright>2024-2026 Omar Ehab</copyright>
+    <managingEditor>oehab559@gmail.com (Omar Ehab)</managingEditor>
+    <atom:link href="https://omar.dev/feed.xml" rel="self" type="application/rss+xml"/>
+    <lastBuildDate>Sat, 15 Mar 2026 00:00:00 +0000</lastBuildDate>
+
+    <item>
+      <title>Building RemedyIQ: Enterprise Log Intelligence with Go &amp; AI</title>
+      <link>https://omar.dev/blog.html?post=building-remedyiq</link>
+      <guid>https://omar.dev/blog.html?post=building-remedyiq</guid>
+      <pubDate>Sun, 15 Mar 2026 00:00:00 +0000</pubDate>
+      <description>Architecture deep-dive into RemedyIQ — a 3-service Go platform for AR Server log analysis with AI-powered insights.</description>
+      <category>go</category>
+      <category>ai</category>
+      <category>architecture</category>
+      <category>clickhouse</category>
+      <category>bmc-remedy</category>
+    </item>
+
+    <item>
+      <title>Building an Air-Gapped RAG Agent for BMC Remedy</title>
+      <link>https://omar.dev/blog.html?post=building-rag-agent</link>
+      <guid>https://omar.dev/blog.html?post=building-rag-agent</guid>
+      <pubDate>Tue, 10 Mar 2026 00:00:00 +0000</pubDate>
+      <description>How I built an on-premise RAG agent with LangChain4j, pgvector, and local embeddings for BMC Remedy ITSM.</description>
+      <category>java</category>
+      <category>rag</category>
+      <category>ai</category>
+      <category>langchain4j</category>
+      <category>bmc-remedy</category>
+    </item>
+
+    <item>
+      <title>Building a Retro Portfolio with Vanilla JS</title>
+      <link>https://omar.dev/blog.html?post=building-retro-portfolio</link>
+      <guid>https://omar.dev/blog.html?post=building-retro-portfolio</guid>
+      <pubDate>Thu, 25 Dec 2025 00:00:00 +0000</pubDate>
+      <description>Why I chose vanilla HTML, CSS, and JavaScript for my portfolio, and how I built the retro aesthetic.</description>
+      <category>webdev</category>
+      <category>javascript</category>
+      <category>css</category>
+    </item>
+
+    <item>
+      <title>My Journey with BMC Remedy ITSM</title>
+      <link>https://omar.dev/blog.html?post=bmc-remedy-journey</link>
+      <guid>https://omar.dev/blog.html?post=bmc-remedy-journey</guid>
+      <pubDate>Sat, 20 Dec 2025 00:00:00 +0000</pubDate>
+      <description>From confusion to competence: My experience learning BMC Remedy and becoming a certified developer.</description>
+      <category>BMCRemedy</category>
+      <category>ITSM</category>
+    </item>
+
+    <item>
+      <title>Microservices: When to Use (and When Not)</title>
+      <link>https://omar.dev/blog.html?post=microservices-when-to-use</link>
+      <guid>https://omar.dev/blog.html?post=microservices-when-to-use</guid>
+      <pubDate>Sun, 14 Dec 2025 00:00:00 +0000</pubDate>
+      <description>A practical guide to deciding between microservices and monoliths, based on real-world experience.</description>
+      <category>architecture</category>
+      <category>microservices</category>
+    </item>
+
+    <item>
+      <title>Spring Boot Best Practices in 2025</title>
+      <link>https://omar.dev/blog.html?post=spring-boot-best-practices</link>
+      <guid>https://omar.dev/blog.html?post=spring-boot-best-practices</guid>
+      <pubDate>Sat, 06 Dec 2025 00:00:00 +0000</pubDate>
+      <description>Battle-tested patterns and practices for building production-ready Spring Boot 3.x applications.</description>
+      <category>java</category>
+      <category>springboot</category>
+    </item>
+
+    <item>
+      <title>The Art of Debugging at 3AM</title>
+      <link>https://omar.dev/blog.html?post=debugging-at-3am</link>
+      <guid>https://omar.dev/blog.html?post=debugging-at-3am</guid>
+      <pubDate>Thu, 27 Nov 2025 00:00:00 +0000</pubDate>
+      <description>War stories and practical tips for debugging production issues when everything is on fire.</description>
+      <category>debugging</category>
+      <category>devops</category>
+    </item>
+
+  </channel>
+</rss>

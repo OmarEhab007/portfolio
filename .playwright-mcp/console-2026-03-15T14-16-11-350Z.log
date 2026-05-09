@@ -1,0 +1,3 @@
+[      24ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://localhost:8787/assets/images/moon.png:0
+[      26ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://localhost:8787/assets/images/electricity.png:0
+[      27ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://localhost:8787/assets/images/chat.png:0

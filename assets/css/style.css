@@ -478,8 +478,25 @@ button {
   #EXPERIENCE BOX
 \*-----------------------------------*/
 
+.exp-timeline {
+  position: relative;
+  padding-left: 20px;
+}
+
+.exp-timeline::before {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 8px;
+  bottom: 8px;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--text-cyan), transparent);
+  opacity: 0.3;
+}
+
 .exp-item {
-  padding: 12px 0;
+  position: relative;
+  padding: 14px 0;
   border-bottom: 1px dotted var(--border-main);
 }
 
@@ -487,38 +504,88 @@ button {
   border-bottom: none;
 }
 
+.exp-dot {
+  position: absolute;
+  left: -18px;
+  top: 18px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--text-cyan);
+  border: 1px solid var(--bg-dark);
+  box-shadow: 0 0 6px rgba(125, 211, 252, 0.5);
+}
+
+.exp-body {
+  /* content area */
+}
+
 .exp-title {
   font-size: 17px;
   color: var(--text-cyan);
+  margin-bottom: 3px;
 }
 
 .exp-meta {
-  font-size: 14px;
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-bottom: 5px;
+}
+
+.exp-company {
   color: var(--text-green);
+}
+
+.exp-company-desc {
+  font-size: 13px;
+  color: var(--text-dim);
+  font-style: italic;
   margin-bottom: 8px;
+  border-left: 2px solid var(--border-main);
+  padding-left: 8px;
 }
 
 .exp-list {
   font-size: 15px;
   color: var(--text-secondary);
+  margin: 0 0 8px 0;
+  padding-left: 0;
 }
 
 .exp-list li {
-  padding: 2px 0;
+  padding: 3px 0;
   padding-left: 15px;
   position: relative;
+  line-height: 1.4;
 }
 
 .exp-list li::before {
-  content: '├─';
+  content: '▸';
   position: absolute;
   left: 0;
   color: var(--text-dim);
-  font-size: 12px;
+  font-size: 10px;
+  top: 5px;
 }
 
 .exp-list li:last-child::before {
-  content: '└─';
+  color: var(--text-dim);
+}
+
+.exp-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 8px;
+}
+
+.exp-tag {
+  font-size: 11px;
+  padding: 1px 8px;
+  border: 1px solid var(--border-main);
+  color: var(--text-dim);
+  background: rgba(255, 255, 255, 0.03);
+  font-family: var(--font-pixel);
 }
 
 /*-----------------------------------*\
@@ -1434,4 +1501,195 @@ textarea:focus-visible {
   .flair-gif {
     transition: none;
   }
+}
+
+/*-----------------------------------*\
+  #PROJECT CARDS ENHANCED
+\*-----------------------------------*/
+
+.project-item {
+  padding: 12px 0;
+  border-bottom: 1px dotted var(--border-main);
+  transition: all 0.2s ease;
+}
+
+.project-item:last-child {
+  border-bottom: none;
+}
+
+.project-item:hover {
+  background: rgba(125, 211, 252, 0.03);
+}
+
+.project-pinned {
+  border-left: 2px solid rgba(125, 211, 252, 0.4);
+  padding-left: 10px;
+  margin-left: -11px;
+}
+
+.project-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+
+.project-pin-badge {
+  font-size: 11px;
+  color: var(--text-dim);
+  opacity: 0.7;
+}
+
+.project-stars-badge {
+  font-size: 12px;
+  color: var(--text-yellow);
+  margin-left: auto;
+}
+
+.project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 6px;
+}
+
+.tech-pill {
+  font-size: 11px;
+  padding: 1px 7px;
+  border-radius: 10px;
+  border: 1px solid;
+  font-family: var(--font-pixel);
+  line-height: 1.6;
+}
+
+.pill-go   { color: #79d4e0; border-color: rgba(121,212,224,0.25); background: rgba(121,212,224,0.07); }
+.pill-java { color: #f89820; border-color: rgba(248,152,32,0.25);  background: rgba(248,152,32,0.07);  }
+.pill-ts   { color: #5a9fd4; border-color: rgba(90,159,212,0.25);  background: rgba(90,159,212,0.07);  }
+.pill-db   { color: #c4b5fd; border-color: rgba(196,181,253,0.25); background: rgba(196,181,253,0.07); }
+.pill-ai   { color: #86efac; border-color: rgba(134,239,172,0.25); background: rgba(134,239,172,0.07); }
+.pill-data { color: #fde047; border-color: rgba(253,224,71,0.25);  background: rgba(253,224,71,0.07);  }
+.pill-infra{ color: #f9a8d4; border-color: rgba(249,168,212,0.25); background: rgba(249,168,212,0.07); }
+
+/*-----------------------------------*\
+  #READING TIME & BLOG ENHANCEMENTS
+\*-----------------------------------*/
+
+.blog-entry-reading-time {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-left: 8px;
+}
+
+.post-reading-time {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-left: 12px;
+}
+
+/*-----------------------------------*\
+  #404 PAGE
+\*-----------------------------------*/
+
+.page-404 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  text-align: center;
+  gap: 16px;
+}
+
+.page-404 h1 {
+  font-size: 80px;
+  color: var(--text-cyan);
+  text-shadow: 0 0 20px rgba(125, 211, 252, 0.4);
+  line-height: 1;
+}
+
+.page-404 p {
+  font-size: 22px;
+  color: var(--text-secondary);
+}
+
+.page-404 a {
+  font-size: 18px;
+  border: 1px solid var(--text-cyan);
+  padding: 6px 20px;
+}
+
+.page-404 a:hover {
+  background: rgba(125, 211, 252, 0.1);
+}
+
+/*-----------------------------------*\
+  #BLOG PREV/NEXT NAV
+\*-----------------------------------*/
+
+.post-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-main);
+  font-size: 15px;
+}
+
+.post-nav a {
+  max-width: 48%;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.post-nav a:hover {
+  color: var(--text-cyan);
+}
+
+.post-nav .nav-prev { text-align: left; }
+.post-nav .nav-next { text-align: right; margin-left: auto; }
+
+.post-nav-label {
+  display: block;
+  font-size: 11px;
+  color: var(--text-dim);
+  margin-bottom: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/*-----------------------------------*\
+  #BLOG SEARCH
+\*-----------------------------------*/
+
+.blog-search-wrap {
+  margin-bottom: 20px;
+}
+
+.blog-search-input {
+  width: 100%;
+  background: var(--bg-input);
+  border: 1px solid var(--border-main);
+  color: var(--text-primary);
+  padding: 8px 14px;
+  font-size: 16px;
+  font-family: var(--font-main);
+  transition: border-color var(--transition);
+}
+
+.blog-search-input:focus {
+  outline: none;
+  border-color: var(--text-cyan);
+}
+
+.blog-search-input::placeholder {
+  color: var(--text-dim);
+}
+
+.blog-no-results {
+  color: var(--text-dim);
+  font-size: 16px;
+  padding: 20px 0;
+  text-align: center;
 }

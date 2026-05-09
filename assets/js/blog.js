@@ -161,25 +161,63 @@ class BlogManager {
       return;
     }
     
-    const html = this.blogsData.blogs.map(blog => `
-      <article class="blog-entry">
-        <h2 class="blog-entry-title">
-          <a href="blog.html?post=${blog.id}">${this.escapeHtml(blog.title)}</a>
-        </h2>
-        <div class="blog-entry-meta">
-          <span class="blog-entry-date">${blog.dateFormatted}</span>
-          <div class="blog-entry-tags">
-            ${blog.tags.map(tag => `
-              <a href="blog.html?tag=${tag}" class="blog-tag">#${tag}</a>
-            `).join('')}
+    // Search bar
+    const searchHtml = `
+      <div class="blog-search-wrap">
+        <input type="text" class="blog-search-input" id="blog-search" placeholder="🔍 Search posts..." autocomplete="off">
+      </div>
+    `;
+
+    const entriesHtml = this.blogsData.blogs.map(blog => {
+      const readingMins = this.estimateReadingTime(blog.description, 200); // rough estimate
+      return `
+        <article class="blog-entry" data-title="${blog.title.toLowerCase()}" data-tags="${blog.tags.join(' ').toLowerCase()}">
+          <h2 class="blog-entry-title">
+            <a href="blog.html?post=${blog.id}">${this.escapeHtml(blog.title)}</a>
+          </h2>
+          <div class="blog-entry-meta">
+            <span class="blog-entry-date">${blog.dateFormatted}</span>
+            <span class="blog-entry-reading-time">· ~${readingMins} min read</span>
+            <div class="blog-entry-tags">
+              ${blog.tags.map(tag => `
+                <a href="blog.html?tag=${tag}" class="blog-tag">#${tag}</a>
+              `).join('')}
+            </div>
           </div>
-        </div>
-        <p class="blog-entry-description">${this.escapeHtml(blog.description)}</p>
-        <a href="blog.html?post=${blog.id}" class="blog-entry-link">Read more →</a>
-      </article>
-    `).join('');
+          <p class="blog-entry-description">${this.escapeHtml(blog.description)}</p>
+          <a href="blog.html?post=${blog.id}" class="blog-entry-link">Read more →</a>
+        </article>
+      `;
+    }).join('');
     
-    this.blogEntries.innerHTML = html;
+    this.blogEntries.innerHTML = searchHtml + entriesHtml;
+    
+    // Setup search filtering
+    const searchInput = document.getElementById('blog-search');
+    if (searchInput) {
+      searchInput.addEventListener('input', () => {
+        const q = searchInput.value.toLowerCase().trim();
+        const articles = this.blogEntries.querySelectorAll('.blog-entry');
+        let visible = 0;
+        articles.forEach(a => {
+          const title = a.dataset.title || '';
+          const tags = a.dataset.tags || '';
+          const match = !q || title.includes(q) || tags.includes(q);
+          a.style.display = match ? '' : 'none';
+          if (match) visible++;
+        });
+        // Show no-results message
+        let noRes = document.getElementById('blog-no-results');
+        if (!noRes) {
+          noRes = document.createElement('p');
+          noRes.id = 'blog-no-results';
+          noRes.className = 'blog-no-results';
+          noRes.textContent = 'No posts found.';
+          this.blogEntries.appendChild(noRes);
+        }
+        noRes.style.display = visible === 0 ? '' : 'none';
+      });
+    }
     
     // Add click handlers for internal navigation
     this.blogEntries.querySelectorAll('a[href^="blog.html?post="]').forEach(link => {
@@ -190,6 +228,11 @@ class BlogManager {
         this.showPost(postId);
       });
     });
+  }
+
+  estimateReadingTime(text, wordsPerMin = 200) {
+    const words = text.trim().split(/\s+/).length;
+    return Math.max(1, Math.round(words / wordsPerMin));
   }
   
   // ============================================
@@ -239,6 +282,27 @@ class BlogManager {
       const html = marked.parse(markdown);
       
       this.postContent.innerHTML = html;
+
+      // Calculate & display reading time from actual content
+      const wordCount = markdown.trim().split(/\s+/).length;
+      const readingMins = Math.max(1, Math.round(wordCount / 200));
+      const readingTimeEl = document.getElementById('post-reading-time');
+      if (readingTimeEl) {
+        readingTimeEl.textContent = `~${readingMins} min read`;
+      } else {
+        // Inject it into post-date span area
+        const dateEl = document.getElementById('post-date');
+        if (dateEl) {
+          const span = document.createElement('span');
+          span.className = 'post-reading-time';
+          span.id = 'post-reading-time';
+          span.textContent = `· ~${readingMins} min read`;
+          dateEl.parentNode.insertBefore(span, dateEl.nextSibling);
+        }
+      }
+
+      // Add prev/next navigation
+      this.renderPostNav(post);
       
       // Re-highlight code blocks (in case marked didn't catch all)
       this.postContent.querySelectorAll('pre code').forEach(block => {
@@ -262,6 +326,55 @@ class BlogManager {
     }
   }
   
+  // ============================================
+  // POST PREV/NEXT NAVIGATION
+  // ============================================
+
+  renderPostNav(currentPost) {
+    const blogs = this.blogsData.blogs;
+    const idx = blogs.findIndex(b => b.id === currentPost.id);
+    const prev = blogs[idx + 1] || null; // older post
+    const next = blogs[idx - 1] || null; // newer post
+
+    // Remove any existing nav
+    const existing = document.getElementById('post-nav');
+    if (existing) existing.remove();
+
+    const nav = document.createElement('div');
+    nav.className = 'post-nav';
+    nav.id = 'post-nav';
+
+    if (prev) {
+      const prevA = document.createElement('a');
+      prevA.href = `blog.html?post=${prev.id}`;
+      prevA.className = 'nav-prev';
+      prevA.innerHTML = `<span class="post-nav-label">← Older</span>${this.escapeHtml(prev.title)}`;
+      prevA.addEventListener('click', (e) => {
+        e.preventDefault();
+        history.pushState({}, '', `blog.html?post=${prev.id}`);
+        this.showPost(prev.id);
+      });
+      nav.appendChild(prevA);
+    }
+
+    if (next) {
+      const nextA = document.createElement('a');
+      nextA.href = `blog.html?post=${next.id}`;
+      nextA.className = 'nav-next';
+      nextA.innerHTML = `<span class="post-nav-label">Newer →</span>${this.escapeHtml(next.title)}`;
+      nextA.addEventListener('click', (e) => {
+        e.preventDefault();
+        history.pushState({}, '', `blog.html?post=${next.id}`);
+        this.showPost(next.id);
+      });
+      nav.appendChild(nextA);
+    }
+
+    if (prev || next) {
+      this.postContent.appendChild(nav);
+    }
+  }
+
   // ============================================
   // SIDEBAR
   // ============================================

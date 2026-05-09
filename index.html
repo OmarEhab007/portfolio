@@ -3,16 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OMAR.DEV - Welcome!</title>
-  
+  <title>OMAR.DEV — Software Engineer</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Omar Ehab — Software Engineer from Egypt. Backend developer specialising in Java, Go, TypeScript, distributed systems, microservices, and BMC Remedy ITSM. Based in Riyadh, KSA.">
+  <meta name="author" content="Omar Ehab">
+  <meta name="keywords" content="Omar Ehab, software engineer, backend developer, Java, Go, TypeScript, Spring Boot, BMC Remedy, distributed systems, microservices, Riyadh, Egypt">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://omar.dev/">
+  <meta property="og:title" content="OMAR.DEV — Software Engineer">
+  <meta property="og:description" content="Backend developer specialising in Java, Go, TypeScript, distributed systems, and BMC Remedy ITSM. Building things that scale.">
+  <meta property="og:image" content="https://omar.dev/assets/images/new-profile-pic.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="OMAR.DEV — Software Engineer">
+  <meta name="twitter:description" content="Backend developer specialising in Java, Go, TypeScript, distributed systems, and BMC Remedy ITSM.">
+  <meta name="twitter:image" content="https://omar.dev/assets/images/new-profile-pic.png">
+
   <!-- Favicon -->
   <link rel="icon" href="./assets/images/neon-o-icon.svg" type="image/svg+xml">
-  <link rel="alternate icon" href="./assets/images/logo-2.png" type="image/png">
+  <link rel="alternate icon" href="./assets/images/favicon.ico" type="image/x-icon">
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=VT323&family=Pixelify+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="OMAR.DEV Blog" href="./feed.xml">
   
   <!-- Stylesheet -->
   <link rel="stylesheet" href="./assets/css/style.css">
@@ -32,7 +53,7 @@
         <div class="box-header">
           <span class="moon-inline">☾</span>
           Welcome to OMAR.DEV!
-          <img src="./assets/images/new-profile pic.png" alt="Omar" class="avatar-small" onerror="this.style.display='none'">
+          <img src="./assets/images/new-profile-pic.png" alt="Omar" class="avatar-small" onerror="this.style.display='none'">
         </div>
 
         <!-- GitHub Stats Bar -->
@@ -81,33 +102,73 @@
       <div class="box experience-box">
         <div class="box-header">
           <span class="moon-inline">☾</span> Experience
+          <a href="./Omar_Ehab_resume.pdf" target="_blank" class="view-all-link" title="Full Resume">Resume →</a>
         </div>
         <div class="box-content">
-          <div class="exp-item">
-            <div class="exp-title">BMC Remedy Developer & Administrator</div>
-            <div class="exp-meta">@ CyberMak • 2024 - Present</div>
-            <ul class="exp-list">
-              <li>Configured BMC Remedy ITSM modules</li>
-              <li>Developed complex workflows and automations</li>
-              <li>Integrated with external systems via REST APIs</li>
-            </ul>
-          </div>
-          <div class="exp-item">
-            <div class="exp-title">Backend Developer | Java Stack</div>
-            <div class="exp-meta">@ E-Commerce Platform • 2023 - 2024</div>
-            <ul class="exp-list">
-              <li>Developed microservices with Spring Boot</li>
-              <li>Implemented OAuth2/JWT security</li>
-              <li>Automated deployment with K8s</li>
-            </ul>
-          </div>
-          <div class="exp-item">
-            <div class="exp-title">Backend Developer | Node.js</div>
-            <div class="exp-meta">@ Esteathan School ERP • 2021 - 2023</div>
-            <ul class="exp-list">
-              <li>Built RESTful APIs for 20+ schools</li>
-              <li>Managed MongoDB, optimized with Redis</li>
-            </ul>
+          <div class="exp-timeline">
+
+            <div class="exp-item">
+              <div class="exp-dot"></div>
+              <div class="exp-body">
+                <div class="exp-title">BMC Remedy Developer & Administrator</div>
+                <div class="exp-meta">@ <span class="exp-company">CyberMak</span> · Riyadh, KSA · 2024 – Present</div>
+                <p class="exp-company-desc">IT solutions provider specialising in BMC/Helix ITSM enterprise deployments.</p>
+                <ul class="exp-list">
+                  <li>Architected BMC Remedy AR Server workflows handling <span class="text-green">50k+ daily incidents</span></li>
+                  <li>Cut ticket resolution time by <span class="text-cyan">~30%</span> via ITSM automations and smart routing rules</li>
+                  <li>Built RemedyIQ — AI-powered log analysis platform (Go, ClickHouse, NATS) adopted internally</li>
+                  <li>Integrated AR Server with external REST APIs including Active Directory and custom ERP systems</li>
+                </ul>
+                <div class="exp-tags">
+                  <span class="exp-tag">BMC Remedy</span>
+                  <span class="exp-tag">Go</span>
+                  <span class="exp-tag">ITSM</span>
+                  <span class="exp-tag">REST APIs</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="exp-item">
+              <div class="exp-dot"></div>
+              <div class="exp-body">
+                <div class="exp-title">Backend Developer — Java Stack</div>
+                <div class="exp-meta">@ <span class="exp-company">E-Commerce Platform</span> · Remote · 2023 – 2024</div>
+                <p class="exp-company-desc">Multi-vendor e-commerce platform serving thousands of daily active users.</p>
+                <ul class="exp-list">
+                  <li>Designed and delivered <span class="text-green">8 microservices</span> with Spring Boot and Spring Cloud</li>
+                  <li>Implemented OAuth2/JWT auth reducing unauthorised access incidents to <span class="text-cyan">zero</span></li>
+                  <li>Containerised services with Docker + K8s, cutting deployment time from hours to <span class="text-green">minutes</span></li>
+                  <li>Set up Kafka event streaming handling <span class="text-yellow">10k+ events/day</span> between services</li>
+                </ul>
+                <div class="exp-tags">
+                  <span class="exp-tag">Java</span>
+                  <span class="exp-tag">Spring Boot</span>
+                  <span class="exp-tag">Kubernetes</span>
+                  <span class="exp-tag">Kafka</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="exp-item">
+              <div class="exp-dot"></div>
+              <div class="exp-body">
+                <div class="exp-title">Backend Developer — Node.js</div>
+                <div class="exp-meta">@ <span class="exp-company">Esteathan School ERP</span> · Cairo, EG · 2021 – 2023</div>
+                <p class="exp-company-desc">SaaS ERP platform for K-12 schools across Egypt and the Gulf region.</p>
+                <ul class="exp-list">
+                  <li>Built RESTful APIs serving <span class="text-green">20+ schools</span> and 5,000+ students</li>
+                  <li>Reduced API response times by <span class="text-cyan">40%</span> via Redis caching and MongoDB query optimisation</li>
+                  <li>Designed multi-tenant data model with role-based access control</li>
+                </ul>
+                <div class="exp-tags">
+                  <span class="exp-tag">Node.js</span>
+                  <span class="exp-tag">MongoDB</span>
+                  <span class="exp-tag">Redis</span>
+                  <span class="exp-tag">TypeScript</span>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -116,59 +177,117 @@
       <div class="box projects-box">
         <div class="box-header">
           <span class="moon-inline">☾</span> Projects
+          <a href="https://github.com/OmarEhab007" target="_blank" class="view-all-link" title="More on GitHub">More →</a>
         </div>
         <div class="box-content">
           <ul class="projects-list">
-            <li>
-              <a href="https://github.com/OmarEhab007/RemedyIQ" target="_blank" class="project-link">
-                <span class="project-icon">☾</span> RemedyIQ
-              </a>
-              <p class="project-desc">Enterprise log intelligence platform for BMC Remedy AR Server. Built with Go 1.24, Next.js 16, ClickHouse, NATS JetStream, and AI-powered analysis via Gemini & Anthropic. <a href="https://github.com/OmarEhab007/RemedyIQ" target="_blank">Link</a></p>
+            <li class="project-item project-pinned" data-repo="OmarEhab007/RemedyIQ">
+              <div class="project-header">
+                <a href="https://github.com/OmarEhab007/RemedyIQ" target="_blank" class="project-link">
+                  <span class="project-icon">☾</span> RemedyIQ
+                </a>
+                <span class="project-pin-badge">📌 pinned</span>
+                <span class="project-stars-badge" id="stars-RemedyIQ">⭐ --</span>
+              </div>
+              <p class="project-desc">Enterprise log intelligence platform for BMC Remedy AR Server. AI-powered analysis, KQL search, and transaction tracing.</p>
+              <div class="project-tech">
+                <span class="tech-pill pill-go">Go</span>
+                <span class="tech-pill pill-ts">Next.js</span>
+                <span class="tech-pill pill-db">ClickHouse</span>
+                <span class="tech-pill pill-db">NATS</span>
+                <span class="tech-pill pill-ai">AI/LLM</span>
+              </div>
             </li>
-            <li>
-              <a href="https://github.com/OmarEhab007/bmc-remedy-rag-agent" target="_blank" class="project-link">
-                <span class="project-icon">☾</span> BMC Remedy RAG Agent
-              </a>
-              <p class="project-desc">On-premise RAG agent for BMC Remedy ITSM with local embeddings and semantic search. Java 17, Spring Boot 3.2, LangChain4j, pgvector. 100% air-gapped. <a href="https://github.com/OmarEhab007/bmc-remedy-rag-agent" target="_blank">Link</a></p>
+            <li class="project-item project-pinned" data-repo="OmarEhab007/bmc-remedy-rag-agent">
+              <div class="project-header">
+                <a href="https://github.com/OmarEhab007/bmc-remedy-rag-agent" target="_blank" class="project-link">
+                  <span class="project-icon">☾</span> BMC Remedy RAG Agent
+                </a>
+                <span class="project-pin-badge">📌 pinned</span>
+                <span class="project-stars-badge" id="stars-bmc-remedy-rag-agent">⭐ --</span>
+              </div>
+              <p class="project-desc">On-premise RAG agent for BMC Remedy ITSM. 100% air-gapped with local embeddings and semantic search.</p>
+              <div class="project-tech">
+                <span class="tech-pill pill-java">Java</span>
+                <span class="tech-pill pill-java">Spring Boot</span>
+                <span class="tech-pill pill-db">pgvector</span>
+                <span class="tech-pill pill-ai">LangChain4j</span>
+              </div>
             </li>
-            <li>
-              <a href="https://github.com/OmarEhab007/Data_Engineering_Mentorship" target="_blank" class="project-link">
-                <span class="project-icon">☾</span> Data Engineering Mentorship
-              </a>
-              <span class="project-stars">⭐ 278</span>
-              <p class="project-desc">Comprehensive mentorship program and resource collection for data engineering. <a href="https://github.com/OmarEhab007/Data_Engineering_Mentorship" target="_blank">Link</a></p>
+            <li class="project-item" data-repo="OmarEhab007/Data_Engineering_Mentorship">
+              <div class="project-header">
+                <a href="https://github.com/OmarEhab007/Data_Engineering_Mentorship" target="_blank" class="project-link">
+                  <span class="project-icon">☾</span> Data Engineering Mentorship
+                </a>
+                <span class="project-stars-badge" id="stars-Data_Engineering_Mentorship">⭐ 278</span>
+              </div>
+              <p class="project-desc">Comprehensive mentorship program and resource collection for data engineering.</p>
+              <div class="project-tech">
+                <span class="tech-pill pill-data">Data Eng</span>
+                <span class="tech-pill pill-data">Python</span>
+              </div>
             </li>
-            <li>
-              <a href="https://github.com/OmarEhab007/Da7e7" target="_blank" class="project-link">
-                <span class="project-icon">☾</span> Da7e7
-              </a>
-              <p class="project-desc">SaaS platform using AI for PDF text summarization. Built with Next.js 13.5, tRPC, TypeScript. <a href="https://github.com/OmarEhab007/Da7e7" target="_blank">Link</a></p>
+            <li class="project-item" data-repo="OmarEhab007/Da7e7">
+              <div class="project-header">
+                <a href="https://github.com/OmarEhab007/Da7e7" target="_blank" class="project-link">
+                  <span class="project-icon">☾</span> Da7e7
+                </a>
+                <span class="project-stars-badge" id="stars-Da7e7">⭐ --</span>
+              </div>
+              <p class="project-desc">SaaS platform using AI for PDF text summarisation. Built with Next.js 13.5, tRPC, TypeScript.</p>
+              <div class="project-tech">
+                <span class="tech-pill pill-ts">Next.js</span>
+                <span class="tech-pill pill-ts">tRPC</span>
+                <span class="tech-pill pill-ai">AI</span>
+              </div>
             </li>
-            <li>
-              <a href="https://github.com/OmarEhab007/ecommerce-admin" target="_blank" class="project-link">
-                <span class="project-icon">☾</span> E-Commerce Admin
-              </a>
-              <p class="project-desc">Full Stack E-Commerce Dashboard & CMS with Next.js 13, React, Prisma. <a href="https://github.com/OmarEhab007/ecommerce-admin" target="_blank">Link</a></p>
+            <li class="project-item" data-repo="OmarEhab007/ecommerce-admin">
+              <div class="project-header">
+                <a href="https://github.com/OmarEhab007/ecommerce-admin" target="_blank" class="project-link">
+                  <span class="project-icon">☾</span> E-Commerce Admin
+                </a>
+                <span class="project-stars-badge" id="stars-ecommerce-admin">⭐ --</span>
+              </div>
+              <p class="project-desc">Full Stack E-Commerce Dashboard & CMS with Next.js 13, React, Prisma.</p>
+              <div class="project-tech">
+                <span class="tech-pill pill-ts">Next.js</span>
+                <span class="tech-pill pill-ts">React</span>
+                <span class="tech-pill pill-db">Prisma</span>
+              </div>
             </li>
-            <li>
-              <a href="https://github.com/OmarEhab007/Microservice-SpringBoot" target="_blank" class="project-link">
-                <span class="project-icon">☾</span> Microservice SpringBoot
-              </a>
-              <p class="project-desc">Microservices architecture demo with Spring Boot, demonstrating distributed patterns. <a href="https://github.com/OmarEhab007/Microservice-SpringBoot" target="_blank">Link</a></p>
+            <li class="project-item" data-repo="OmarEhab007/Microservice-SpringBoot">
+              <div class="project-header">
+                <a href="https://github.com/OmarEhab007/Microservice-SpringBoot" target="_blank" class="project-link">
+                  <span class="project-icon">☾</span> Microservice SpringBoot
+                </a>
+                <span class="project-stars-badge" id="stars-Microservice-SpringBoot">⭐ --</span>
+              </div>
+              <p class="project-desc">Microservices architecture demo with Spring Boot, demonstrating distributed patterns.</p>
+              <div class="project-tech">
+                <span class="tech-pill pill-java">Java</span>
+                <span class="tech-pill pill-java">Spring Boot</span>
+                <span class="tech-pill pill-infra">Docker</span>
+              </div>
             </li>
-            <li>
-              <a href="https://github.com/OmarEhab007/Facial-emotion-recognition" target="_blank" class="project-link">
-                <span class="project-icon">☾</span> Facial Emotion Recognition
-              </a>
-              <p class="project-desc">Deep Learning model for facial expression recognition using Python. <a href="https://github.com/OmarEhab007/Facial-emotion-recognition" target="_blank">Link</a></p>
+            <li class="project-item" data-repo="OmarEhab007/Facial-emotion-recognition">
+              <div class="project-header">
+                <a href="https://github.com/OmarEhab007/Facial-emotion-recognition" target="_blank" class="project-link">
+                  <span class="project-icon">☾</span> Facial Emotion Recognition
+                </a>
+                <span class="project-stars-badge" id="stars-Facial-emotion-recognition">⭐ --</span>
+              </div>
+              <p class="project-desc">Deep Learning model for facial expression recognition using Python.</p>
+              <div class="project-tech">
+                <span class="tech-pill pill-data">Python</span>
+                <span class="tech-pill pill-ai">Deep Learning</span>
+              </div>
             </li>
           </ul>
           
           <div class="other-projects">
-            <strong>And other projects:</strong>
+            <strong>And more:</strong>
             <a href="https://github.com/OmarEhab007/ecommerce-store" target="_blank">E-Commerce Store</a> ✩
-            <a href="https://github.com/OmarEhab007" target="_blank">Self-Driving-Car-V2X</a> ✩
-            <a href="https://github.com/OmarEhab007" target="_blank">More on GitHub</a>
+            <a href="https://github.com/OmarEhab007" target="_blank">All repos →</a>
           </div>
         </div>
       </div>
@@ -286,6 +405,27 @@
               <span class="blog-date">— Wednesday, Nov 27th, 2025</span>
             </li>
           </ul>
+        </div>
+      </div>
+
+      <!-- Guestbook Box -->
+      <div class="box guestbook-box" id="guestbook">
+        <div class="box-header">
+          <span class="moon-inline">☾</span> Guestbook
+        </div>
+        <div class="box-content">
+          <div class="guestbook-entries" id="guestbook-entries">
+            <div class="gb-entry">
+              <span class="gb-name">System</span>
+              <span class="gb-date">Jan 1, 2026</span>
+              <p class="gb-msg">Welcome to the guestbook! Leave a message 🌙</p>
+            </div>
+          </div>
+          <form class="guestbook-form" onsubmit="return false;">
+            <input type="text" id="gb-name" placeholder="Your name (optional)" maxlength="30">
+            <textarea id="gb-message" placeholder="Leave a message..." maxlength="200" required></textarea>
+            <button type="button" id="gb-submit">Sign Guestbook ☾</button>
+          </form>
         </div>
       </div>
       

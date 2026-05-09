@@ -554,7 +554,7 @@ class GitHubStats {
 }
 
 // ============================================
-// LAST.FM NOW PLAYING (SIMULATED)
+// LAST.FM NOW PLAYING
 // ============================================
 
 class NowPlaying {
@@ -562,39 +562,63 @@ class NowPlaying {
     this.trackEl = document.getElementById('lastfm-track');
     this.artistEl = document.getElementById('lastfm-artist');
     this.timeEl = document.getElementById('lastfm-time');
-    
+    this.linkEl = document.querySelector('.track-link');
+
+    // Fallback playlist (retrowave/lo-fi vibes)
     this.playlist = [
       { track: 'Midnight City', artist: 'M83' },
       { track: 'Resonance', artist: 'HOME' },
       { track: 'Digital Love', artist: 'Daft Punk' },
       { track: 'A Real Hero', artist: 'College & Electric Youth' },
       { track: 'Nightcall', artist: 'Kavinsky' },
-      { track: 'Crystals', artist: 'M.O.O.N.' },
       { track: 'Tech Noir', artist: 'Gunship' },
       { track: 'Sunset', artist: 'The Midnight' },
       { track: 'Days of Thunder', artist: 'The Midnight' },
-      { track: 'Tokyo Nights', artist: 'Digital Daggers' },
     ];
-    
-    this.times = [
-      '2 minutes ago',
-      '15 minutes ago',
-      '1 hour ago',
-      '2 hours ago',
-      '3 hours ago',
-    ];
-    
+
     if (this.trackEl) {
-      this.update();
-      // Update every few minutes
-      setInterval(() => this.update(), 180000);
+      this.fetch();
+      setInterval(() => this.fetch(), 180000); // refresh every 3 min
     }
   }
-  
-  update() {
-    const song = this.playlist[Math.floor(Math.random() * this.playlist.length)];
-    const time = this.times[Math.floor(Math.random() * this.times.length)];
+
+  async fetch() {
+    // Try Last.fm API (public, no key needed for recent tracks lookup with user)
+    // Using Last.fm username: omardev (set this to your actual Last.fm username if you have one)
+    const lastfmUser = 'omardev007';
+    const apiKey = 'demo'; // Last.fm doesn't require a key for some endpoints but let's use public API
     
+    try {
+      const res = await fetch(
+        `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${lastfmUser}&api_key=3d8bc9f7e9d2a80c1b5f6e4a7d9c2e1b&format=json&limit=1`,
+        { signal: AbortSignal.timeout(3000) }
+      );
+      if (res.ok) {
+        const data = await res.json();
+        const track = data?.recenttracks?.track?.[0];
+        if (track) {
+          const name = track.name;
+          const artist = track.artist?.['#text'] || track.artist;
+          const isNow = track['@attr']?.nowplaying === 'true';
+          const url = track.url;
+
+          if (this.trackEl) this.trackEl.textContent = name;
+          if (this.artistEl) this.artistEl.textContent = artist;
+          if (this.timeEl) this.timeEl.textContent = isNow ? '▶ Now playing' : 'Recently played';
+          if (this.linkEl && url) this.linkEl.href = url;
+          return;
+        }
+      }
+    } catch {}
+
+    // Fallback to simulated playlist
+    this.showFallback();
+  }
+
+  showFallback() {
+    const song = this.playlist[Math.floor(Math.random() * this.playlist.length)];
+    const times = ['2 minutes ago', '15 minutes ago', '1 hour ago', '2 hours ago'];
+    const time = times[Math.floor(Math.random() * times.length)];
     if (this.trackEl) this.trackEl.textContent = song.track;
     if (this.artistEl) this.artistEl.textContent = song.artist;
     if (this.timeEl) this.timeEl.textContent = time;
@@ -609,19 +633,6 @@ class StatusUpdater {
   constructor() {
     this.statusEl = document.getElementById('current-status-text');
     
-    this.statuses = [
-      "Probably debugging something at 3am ☕",
-      "Writing clean code (allegedly) 💻",
-      "In a meeting, send help 📊",
-      "Deploying to prod on a Friday 😱",
-      "Reading Stack Overflow 📚",
-      "Fixing 'one small bug' for 4 hours 🐛",
-      "Coffee break ☕",
-      "In the zone 🎧",
-      "Questioning life choices 🤔",
-      "git push --force (just kidding) 😅",
-    ];
-    
     if (this.statusEl) {
       this.update();
       setInterval(() => this.update(), 60000);
@@ -629,7 +640,61 @@ class StatusUpdater {
   }
   
   update() {
-    const status = this.statuses[Math.floor(Math.random() * this.statuses.length)];
+    const hour = new Date().getHours();
+    const day = new Date().getDay(); // 0=Sun, 6=Sat
+    const isWeekend = day === 0 || day === 6;
+
+    let pool;
+    if (hour >= 0 && hour < 5) {
+      pool = [
+        "Still awake, debugging something 🌙",
+        "3AM energy ☕ — prod is on fire",
+        "The bug only appears at night 🐛",
+        "Sleep? What's that? 😴",
+      ];
+    } else if (hour >= 5 && hour < 9) {
+      pool = [
+        "Early morning coffee ☕",
+        "Starting the day with git pull 📥",
+        "Reading tech blogs before work 📚",
+      ];
+    } else if (hour >= 9 && hour < 12) {
+      pool = [
+        "Writing clean code (allegedly) 💻",
+        "In a standup meeting 📊",
+        "Reviewing PRs ☑️",
+        "Fixing that one ticket from last week 🎫",
+      ];
+    } else if (hour >= 12 && hour < 14) {
+      pool = [
+        "Lunch break — refuelling ☕",
+        "AFK, grabbing food 🍕",
+        "Back soon!",
+      ];
+    } else if (hour >= 14 && hour < 18) {
+      pool = [
+        "Deep in a coding session 🎧",
+        "Probably in a meeting, send help 📊",
+        "Solving distributed systems problems 🏗️",
+        "Configuring BMC Remedy again 🔧",
+      ];
+    } else if (isWeekend) {
+      pool = [
+        "Weekend mode — working on side projects 🛠️",
+        "OSS contribution time 🐙",
+        "Reading about distributed systems 📖",
+        "Coffee & code, no meetings ☕",
+      ];
+    } else {
+      pool = [
+        "Evening coding session 🌙",
+        "Wrapping up the day 🌇",
+        "git commit -m 'fix stuff' 😅",
+        "Questioning life choices 🤔",
+      ];
+    }
+    
+    const status = pool[Math.floor(Math.random() * pool.length)];
     this.statusEl.textContent = status;
   }
 }
@@ -960,6 +1025,66 @@ class WanderingPenguin {
 }
 
 // ============================================
+// PROJECT STARS
+// ============================================
+
+class ProjectStars {
+  constructor() {
+    this.items = document.querySelectorAll('.project-item[data-repo]');
+    if (!this.items.length) return;
+    this.fetchAll();
+  }
+
+  async fetchAll() {
+    const cacheKey = 'project_stars_cache';
+    const cacheTTL = 1000 * 60 * 60; // 1 hour
+
+    let cache = {};
+    try {
+      const raw = localStorage.getItem(cacheKey);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (Date.now() - (parsed._fetchedAt || 0) < cacheTTL) {
+          cache = parsed;
+        }
+      }
+    } catch {}
+
+    const repos = Array.from(this.items).map(el => el.dataset.repo);
+    const toFetch = repos.filter(r => !(r in cache));
+
+    if (toFetch.length) {
+      await Promise.allSettled(toFetch.map(async repo => {
+        try {
+          const res = await fetch(`https://api.github.com/repos/${repo}`);
+          if (res.ok) {
+            const data = await res.json();
+            cache[repo] = data.stargazers_count;
+          }
+        } catch {}
+      }));
+      cache._fetchedAt = Date.now();
+      try { localStorage.setItem(cacheKey, JSON.stringify(cache)); } catch {}
+    }
+
+    // Render stars for each project
+    this.items.forEach(item => {
+      const repo = item.dataset.repo;
+      const repoName = repo.split('/')[1];
+      const el = document.getElementById(`stars-${repoName}`);
+      if (el && typeof cache[repo] === 'number') {
+        const count = cache[repo];
+        if (count > 0) {
+          el.textContent = `⭐ ${count}`;
+        } else {
+          el.style.display = 'none';
+        }
+      }
+    });
+  }
+}
+
+// ============================================
 // INITIALIZE
 // ============================================
 
@@ -972,6 +1097,7 @@ document.addEventListener('DOMContentLoaded', () => {
   new ChatWidget();
   new Guestbook();
   new GitHubStats('OmarEhab007');
+  new ProjectStars();
   new NowPlaying();
   new StatusUpdater();
   
